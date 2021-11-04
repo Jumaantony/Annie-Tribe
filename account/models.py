@@ -5,8 +5,8 @@ from django.conf import settings
 # Create your models here.
 class Profile(models.Model):
     CHOICES = (
-        ('male', 'male'),
-        ('female', 'female'),
+        ('Male', 'Male'),
+        ('Female', 'Female'),
     )
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE)
