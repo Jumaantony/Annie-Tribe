@@ -23,4 +23,8 @@ urlpatterns = [
 
                   # account
                   path('account/', include('account.urls', namespace='account')),
+
+                  # products
+                  path('products/', include('products.urls', namespace='products')),
+
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -13,6 +13,18 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
+# cloudinary imports
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+# cloudinary config
+cloudinary.config(
+    cloud_name="kisumu-org",
+    api_key="773424846215666",
+    api_secret="SaMBazwZvkBe9vubaIMFgjzdR7M",
+)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -42,6 +54,9 @@ MESSAGE_TAGS = {
 INSTALLED_APPS = [
     # accounts app
     'account.apps.AccountConfig',
+
+    # Products app
+    'products.apps.ProductsConfig',
 
 
     # third party packages
