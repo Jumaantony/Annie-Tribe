@@ -1,0 +1,1049 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+
+{{ product.name }}
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="row mt-2 product-cont m-1 pt-3 pb-3">
+      <div class="col-lg-5 col-md-5 col-sm-10 justify-content-center">
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+
+          <!-- Product Carousel Image -->
+          <div class="carousel-inner text-center">
+            <div class="carousel-item active">
+              <a href="{{ product.photo.url }}" class="h-100 w-100 rounded" data-lightbox="roadtrip">
+                <img src="{{ product.photo.url }}" class="p-1 w-75 rounded">
+              </a>
+            </div>
+
+            <div class="carousel-item">
+              <a href="{{ product.photo1.url }}" class="h-100 w-100 rounded" data-lightbox="roadtrip">
+                <img src="{{ product.photo1.url }}" class="p-1 w-75 rounded">
+              </a>
+            </div>
+
+            <div class="carousel-item">
+              <a href="{{ product.photo2.url }}" class="h-100 w-100 rounded" data-lightbox="roadtrip">
+                <img src="{{ product.photo2.url }}" class="p-1 w-75 rounded">
+              </a>
+            </div>
+
+            <div class="carousel-item">
+              <a href="{{ product.photo2.url }}" class="h-100 w-100 rounded" data-lightbox="roadtrip">
+                <img src="{{ product.photo3.url }}" class="p-1 w-75 rounded">
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="carousel-indicators position-relative justify-content-center">
+
+          <!-- Product image as the slider indicator -->
+
+          <img src="{{ product.photo.url }}"  data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1">
+
+          <img src="{{ product.photo1.url }}"  data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+               class="active"  aria-label="Slide 2">
+
+          <img src="{{ product.photo2.url }}"  data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+               class="active"  aria-label="Slide 3">
+
+          <img src="{{ product.photo3.url }}"  data-bs-target="#carouselExampleIndicators"
+               data-bs-slide-to="3"class="active"   aria-label="Slide 4">
+
+          </div>
+
+      </div>
+
+
+
+      <!-- Product info -->
+      <div class="col-lg-7 col-md-7 col-sm-10">
+        <h5 class="fw-bold">
+          {{product.name}}
+        </h5>
+
+        <a class="text-danger" href="wishlist.html">
+          <i class="fa fa-heart pb-2"> Add to WishList</i>
+        </a>
+
+        <p class="bg-dark text-light w-50 text-center py-1 fw-bold rounded"> Countrywide Delivery</p>
+
+        <h6><span class="fw-bold text-danger pt-2">Category:</span>
+          <a href="{{ product.category.get_absolute_url }}" class="text-decoration-none">{{ product.category }}</a>
+        </h6>
+
+        <!-- Product rating Total -->
+        <div class="product-rating text-danger d-inline pt-2">
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <i class="fa fa-star text-dark" aria-hidden="true"></i>
+        </div>
+
+        <h7 class="d-inline pt-2"> (100 ratings) </h7>
+
+        <h4 class="fw-bold pt-2">
+          <span class="text-danger">Ksh:</span>
+          {{ product.price }}
+        </h4>
+
+        <a class="btn btn-md btn-dark btn-outline-danger fw-bold mt-2 w-75" href="cart.html">
+          Add to cart
+        </a>
+
+        <h6 class="pt-3 fw-bold">Share This Product ;</h6>
+
+        <a href="" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-outline-danger text-decoration-none fw-bolder share-btn text-center share-product">
+          <i class="fa fa-facebook" aria-hidden="true"></i>
+        </a>
+
+        <a href="" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-outline-danger text-decoration-none fw-bolder share-btn text-center share-product">
+          <i class="fa fa-whatsapp" aria-hidden="true"></i>
+        </a>
+
+        <a href="" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-outline-danger text-decoration-none fw-bolder share-btn text-center share-product">
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="review-detail p-2 mt-2">
+      <!-- Reviews and Product Detail -->
+      <nav>
+        <div class="nav nav-tabs mt-3 border-danger" id="nav-tab" role="tablist">
+          <button class="nav-link active fw-bold" id="nav-detail-tab" data-bs-toggle="tab" data-bs-target="#nav-detail" type="button" role="tab" aria-controls="nav-detail" aria-selected="true">Product Details</button>
+
+          <button class="nav-link fw-bold" id="nav-review-tab" data-bs-toggle="tab" data-bs-target="#nav-review" type="button" role="tab" aria-controls="nav-review" aria-selected="false">Customer Feedback</button>
+
+        </div>
+      </nav>
+
+      <div class="tab-content" id="nav-tabContent">
+        <!--Product Detail -->
+        <div class="tab-pane fade show active pt-1" id="nav-detail" role="tabpanel" aria-labelledby="nav-detail-tab">
+          {{ product.description }}
+        </div>
+
+
+        <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
+          <h3 class="fw-bolder">
+            Product Reviews
+          </h3>
+
+          <h6 class="d-inline text-end"><a href="" class=" text-decoration-underline text-danger">See All</a></h6>
+
+          <!-- Product Review Single  -->
+          <div class="review-cont bg-dark p-2 mb-2 rounded w-75">
+
+            <!-- Product rating single -->
+            <div class="product-rating text-danger d-inline pt-2">
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+             </div>
+
+            <h6 class="text-danger fw-bold">
+              I love Shopping at Annie Tribe. It offers the best Trending Fashion.
+            </h6>
+
+            <p class="text-light">23rd Oct 2021  <span class="fw-bold">By Mitchie Kemma</span> </p>
+
+          </div>
+
+          <div class="review-cont bg-dark p-2 mb-2 rounded w-75">
+
+            <!-- Product rating single -->
+            <div class="product-rating text-danger d-inline pt-2">
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+             </div>
+
+            <h6 class="text-danger fw-bold">
+              I love Shopping at Annie Tribe. It offers the best Trending Fashion.
+            </h6>
+
+            <p class="text-light">23rd Oct 2021  <span class="fw-bold">By Mitchie Kemma</span> </p>
+
+          </div>
+
+          <div class="review-cont bg-dark p-2 mb-2 rounded w-75">
+
+            <!-- Product rating single -->
+            <div class="product-rating text-danger d-inline pt-2">
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+             </div>
+
+            <h6 class="text-danger fw-bold">
+              I love Shopping at Annie Tribe. It offers the best Trending Fashion.
+            </h6>
+
+            <p class="text-light">23rd Oct 2021  <span class="fw-bold">By Mitchie Kemma</span> </p>
+
+          </div>
+
+          <h6 class="text-decoration-underline fw-bold">Leave a Review  </h6>
+
+          <div class="product-rating text-danger d-inline pt-2">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <h7 class="text-dark fw-bold">5</h7>
+          </div><br>
+
+          <div class="product-rating text-danger d-inline pt-2">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <h7 class="text-dark fw-bold">4</h7>
+          </div><br>
+
+          <div class="product-rating text-danger d-inline pt-2">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <h7 class="text-dark fw-bold">3</h7>
+          </div><br>
+
+          <div class="product-rating text-danger d-inline pt-2">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <h7 class="text-dark fw-bold">2</h7>
+          </div><br>
+
+          <div class="product-rating text-danger d-inline pt-2">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            <h7 class="text-dark fw-bold">1</h7>
+          </div><br>
+
+          <form method="Get|Post" class="comment-form mt-3 p-1 w-75">
+
+
+            <input type="text" class="form-control mb-2" id="Name" placeholder="Your Name" required="">
+
+            <input type="email" class="form-control mb-2" id="Email" aria-describedby="emailHelp" placeholder="Your Email" required="">
+
+            <textarea name="comment" placeholder=" Your Review" class="form-control mb-2" id="Comment" required=""></textarea>
+
+            <input type="submit" class="btn btn-dark btn-outline-danger fw-bolder" name="Review">
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Simmilar Products -->
+
+    <div class="simmilar-products mt-">
+
+      <div class="bg-dark">
+        <h2 class="pt-3 text-light text-center fw-bold">Simmilar Products</h2>
+        <hr class="text-danger mx-auto fw-bolder w-25">
+      </div>
+
+
+      <div class="d-flex justify-content-around align-items-center row p-3 gx-4">
+
+        <!-- Single Product Cont -->
+        <div class="product text-center p-1 col-lg-2 col-md-3 col-sm-5 col-6">
+
+          <div class="product-cont rounded">
+            <div class="mb-3 position-relative">
+
+              <a class="d-block" href="product_detail.html">
+                <!-- Product Image -->
+                <img class="img-fluid w-100 h-100" src="images/dress.jpg" alt="Product image">
+              </a>
+
+              <div class="product-overlay">
+                <ul class="mb-0 list-inline">
+
+                  <!-- Product Like Button/ Add to Wishlist -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-danger btn-dark" href="#">
+                      <i class="fa fa-heart"></i>
+                    </a>
+                  </li>
+
+                  <!-- Product Add to cart -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-dark fw-bold" href="cart.html">
+                      Add to cart
+                    </a>
+                  </li>
+
+                  <!-- Product Detail -->
+                  <li class="list-inline-item mr-0">
+                    <a class="btn  btn-sm btn-outline-danger btn-dark" href="product_detail.html">
+                      <i class="fa fa-info p-1"></i>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-highlight">
+              <h6>
+                <!-- Product title -->
+                <a class="text-decoration-none text-dark fw-bold product-title" href="detail.html">
+                      Fashion Sexiest Mock Neck Ribbed Bodycon Dress
+                </a>
+
+                <!-- Product Price -->
+                <h5 class="small text-muted fw-bold">$250</h5>
+
+              </h6>
+            </div>
+          </div>
+        </div>
+
+        <!-- Single Product Cont -->
+        <div class="product text-center p-1 col-lg-2 col-md-3 col-sm-5 col-6">
+
+          <div class="product-cont rounded">
+            <div class="mb-3 position-relative">
+
+              <a class="d-block" href="product_detail.html">
+                <!-- Product Image -->
+                <img class="img-fluid w-100 h-100" src="images/dress.jpg" alt="Product image">
+              </a>
+
+              <div class="product-overlay">
+                <ul class="mb-0 list-inline">
+
+                  <!-- Product Like Button/ Add to Wishlist -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-danger btn-dark" href="#">
+                      <i class="fa fa-heart"></i>
+                    </a>
+                  </li>
+
+                  <!-- Product Add to cart -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-dark fw-bold" href="cart.html">
+                      Add to cart
+                    </a>
+                  </li>
+
+                  <!-- Product Detail -->
+                  <li class="list-inline-item mr-0">
+                    <a class="btn  btn-sm btn-outline-danger btn-dark" href="product_detail.html">
+                      <i class="fa fa-info p-1"></i>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-highlight">
+              <h6>
+                <!-- Product title -->
+                <a class="text-decoration-none text-dark fw-bold product-title" href="detail.html">
+                      Fashion Sexiest Mock Neck Ribbed Bodycon Dress
+                </a>
+
+                <!-- Product Price -->
+                <h5 class="small text-muted fw-bold">$250</h5>
+
+              </h6>
+            </div>
+          </div>
+        </div>
+
+        <!-- Single Product Cont -->
+        <div class="product text-center p-1 col-lg-2 col-md-3 col-sm-5 col-6">
+
+          <div class="product-cont rounded">
+            <div class="mb-3 position-relative">
+
+              <a class="d-block" href="product_detail.html">
+                <!-- Product Image -->
+                <img class="img-fluid w-100 h-100" src="images/dress.jpg" alt="Product image">
+              </a>
+
+              <div class="product-overlay">
+                <ul class="mb-0 list-inline">
+
+                  <!-- Product Like Button/ Add to Wishlist -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-danger btn-dark" href="#">
+                      <i class="fa fa-heart"></i>
+                    </a>
+                  </li>
+
+                  <!-- Product Add to cart -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-dark fw-bold" href="cart.html">
+                      Add to cart
+                    </a>
+                  </li>
+
+                  <!-- Product Detail -->
+                  <li class="list-inline-item mr-0">
+                    <a class="btn  btn-sm btn-outline-danger btn-dark" href="product_detail.html">
+                      <i class="fa fa-info p-1"></i>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-highlight">
+              <h6>
+                <!-- Product title -->
+                <a class="text-decoration-none text-dark fw-bold product-title" href="detail.html">
+                      Fashion Sexiest Mock Neck Ribbed Bodycon Dress
+                </a>
+
+                <!-- Product Price -->
+                <h5 class="small text-muted fw-bold">$250</h5>
+
+              </h6>
+            </div>
+          </div>
+        </div>
+
+        <!-- Single Product Cont -->
+        <div class="product text-center p-1 col-lg-2 col-md-3 col-sm-5 col-6">
+
+          <div class="product-cont rounded">
+            <div class="mb-3 position-relative">
+
+              <a class="d-block" href="product_detail.html">
+                <!-- Product Image -->
+                <img class="img-fluid w-100 h-100" src="images/dress.jpg" alt="Product image">
+              </a>
+
+              <div class="product-overlay">
+                <ul class="mb-0 list-inline">
+
+                  <!-- Product Like Button/ Add to Wishlist -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-danger btn-dark" href="#">
+                      <i class="fa fa-heart"></i>
+                    </a>
+                  </li>
+
+                  <!-- Product Add to cart -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-dark fw-bold" href="cart.html">
+                      Add to cart
+                    </a>
+                  </li>
+
+                  <!-- Product Detail -->
+                  <li class="list-inline-item mr-0">
+                    <a class="btn  btn-sm btn-outline-danger btn-dark" href="product_detail.html">
+                      <i class="fa fa-info p-1"></i>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-highlight">
+              <h6>
+                <!-- Product title -->
+                <a class="text-decoration-none text-dark fw-bold product-title" href="detail.html">
+                      Fashion Sexiest Mock Neck Ribbed Bodycon Dress
+                </a>
+
+                <!-- Product Price -->
+                <h5 class="small text-muted fw-bold">$250</h5>
+
+              </h6>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Reccomended Products -->
+    <div class="">
+
+      <h2 class="pt-3 text-dark text-center fw-bold">Reccomended For You</h2>
+      <hr class="text-danger mx-auto fw-bolder w-25">
+
+
+      <div class="d-flex justify-content-center align-items-center  p-1 my-slider">
+        <!-- Single Product Cont -->
+        <div class="product text-center p-1">
+          <div class="product-cont rounded">
+            <div class="mb-3 position-relative">
+
+              <a class="d-block" href="product_detail.html">
+                <!-- Product Image -->
+                <img class="img-fluid w-100 h-100 rounded-top" src="images/dress.jpg" alt="Product image">
+              </a>
+
+              <div class="product-overlay">
+                <ul class="mb-0 list-inline">
+
+                  <!-- Product Like Button/ Add to Wishlist -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-danger btn-dark" href="#">
+                      <i class="fa fa-heart"></i>
+                    </a>
+                  </li>
+
+                  <!-- Product Add to cart -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-dark fw-bold" href="cart.html">
+                      Add to cart
+                    </a>
+                  </li>
+
+                  <!-- Product Detail -->
+                  <li class="list-inline-item mr-0">
+                    <a class="btn  btn-sm btn-outline-danger btn-dark" href="product_detail.html">
+                      <i class="fa fa-info p-1"></i>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-highlight">
+              <h6>
+                <!-- Product title -->
+                <a class="text-decoration-none product-title fw-bold" href="product_detail.html">
+                      Fashion Sexiest Mock Neck Ribbed Bodycon Dress
+                </a>
+
+                <!-- Product Price -->
+                <h5 class="small fw-bold pb-2">$250</h5>
+
+              </h6>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Single Product Cont -->
+        <div class="product text-center p-1">
+          <div class="product-cont rounded">
+            <div class="mb-3 position-relative">
+
+              <a class="d-block" href="product_detail.html">
+                <!-- Product Image -->
+                <img class="img-fluid w-100 h-100 rounded-top" src="images/dress.jpg" alt="Product image">
+              </a>
+
+              <div class="product-overlay">
+                <ul class="mb-0 list-inline">
+
+                  <!-- Product Like Button/ Add to Wishlist -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-danger btn-dark" href="#">
+                      <i class="fa fa-heart"></i>
+                    </a>
+                  </li>
+
+                  <!-- Product Add to cart -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-dark fw-bold" href="cart.html">
+                      Add to cart
+                    </a>
+                  </li>
+
+                  <!-- Product Detail -->
+                  <li class="list-inline-item mr-0">
+                    <a class="btn  btn-sm btn-outline-danger btn-dark" href="product_detail.html">
+                      <i class="fa fa-info p-1"></i>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-highlight">
+              <h6>
+                <!-- Product title -->
+                <a class="text-decoration-none product-title fw-bold" href="product_detail.html">
+                      Fashion Sexiest Mock Neck Ribbed Bodycon Dress
+                </a>
+
+                <!-- Product Price -->
+                <h5 class="small fw-bold pb-2">$250</h5>
+
+              </h6>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Single Product Cont -->
+        <div class="product text-center p-1">
+          <div class="product-cont rounded">
+            <div class="mb-3 position-relative">
+
+              <a class="d-block" href="product_detail.html">
+                <!-- Product Image -->
+                <img class="img-fluid w-100 h-100 rounded-top" src="images/dress.jpg" alt="Product image">
+              </a>
+
+              <div class="product-overlay">
+                <ul class="mb-0 list-inline">
+
+                  <!-- Product Like Button/ Add to Wishlist -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-danger btn-dark" href="#">
+                      <i class="fa fa-heart"></i>
+                    </a>
+                  </li>
+
+                  <!-- Product Add to cart -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-dark fw-bold" href="cart.html">
+                      Add to cart
+                    </a>
+                  </li>
+
+                  <!-- Product Detail -->
+                  <li class="list-inline-item mr-0">
+                    <a class="btn  btn-sm btn-outline-danger btn-dark" href="product_detail.html">
+                      <i class="fa fa-info p-1"></i>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-highlight">
+              <h6>
+                <!-- Product title -->
+                <a class="text-decoration-none product-title fw-bold" href="product_detail.html">
+                      Fashion Sexiest Mock Neck Ribbed Bodycon Dress
+                </a>
+
+                <!-- Product Price -->
+                <h5 class="small fw-bold pb-2">$250</h5>
+
+              </h6>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Single Product Cont -->
+        <div class="product text-center p-1">
+          <div class="product-cont rounded">
+            <div class="mb-3 position-relative">
+
+              <a class="d-block" href="product_detail.html">
+                <!-- Product Image -->
+                <img class="img-fluid w-100 h-100 rounded-top" src="images/dress.jpg" alt="Product image">
+              </a>
+
+              <div class="product-overlay">
+                <ul class="mb-0 list-inline">
+
+                  <!-- Product Like Button/ Add to Wishlist -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-danger btn-dark" href="#">
+                      <i class="fa fa-heart"></i>
+                    </a>
+                  </li>
+
+                  <!-- Product Add to cart -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-dark fw-bold" href="cart.html">
+                      Add to cart
+                    </a>
+                  </li>
+
+                  <!-- Product Detail -->
+                  <li class="list-inline-item mr-0">
+                    <a class="btn  btn-sm btn-outline-danger btn-dark" href="product_detail.html">
+                      <i class="fa fa-info p-1"></i>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-highlight">
+              <h6>
+                <!-- Product title -->
+                <a class="text-decoration-none product-title fw-bold" href="product_detail.html">
+                      Fashion Sexiest Mock Neck Ribbed Bodycon Dress
+                </a>
+
+                <!-- Product Price -->
+                <h5 class="small fw-bold pb-2">$250</h5>
+
+              </h6>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Single Product Cont -->
+        <div class="product text-center p-1">
+          <div class="product-cont rounded">
+            <div class="mb-3 position-relative">
+
+              <a class="d-block" href="product_detail.html">
+                <!-- Product Image -->
+                <img class="img-fluid w-100 h-100 rounded-top" src="images/dress.jpg" alt="Product image">
+              </a>
+
+              <div class="product-overlay">
+                <ul class="mb-0 list-inline">
+
+                  <!-- Product Like Button/ Add to Wishlist -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-danger btn-dark" href="#">
+                      <i class="fa fa-heart"></i>
+                    </a>
+                  </li>
+
+                  <!-- Product Add to cart -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-dark fw-bold" href="cart.html">
+                      Add to cart
+                    </a>
+                  </li>
+
+                  <!-- Product Detail -->
+                  <li class="list-inline-item mr-0">
+                    <a class="btn  btn-sm btn-outline-danger btn-dark" href="product_detail.html">
+                      <i class="fa fa-info p-1"></i>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-highlight">
+              <h6>
+                <!-- Product title -->
+                <a class="text-decoration-none product-title fw-bold" href="product_detail.html">
+                      Fashion Sexiest Mock Neck Ribbed Bodycon Dress
+                </a>
+
+                <!-- Product Price -->
+                <h5 class="small fw-bold pb-2">$250</h5>
+
+              </h6>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Single Product Cont -->
+        <div class="product text-center p-1">
+          <div class="product-cont rounded">
+            <div class="mb-3 position-relative">
+
+              <a class="d-block" href="product_detail.html">
+                <!-- Product Image -->
+                <img class="img-fluid w-100 h-100 rounded-top" src="images/dress.jpg" alt="Product image">
+              </a>
+
+              <div class="product-overlay">
+                <ul class="mb-0 list-inline">
+
+                  <!-- Product Like Button/ Add to Wishlist -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-danger btn-dark" href="#">
+                      <i class="fa fa-heart"></i>
+                    </a>
+                  </li>
+
+                  <!-- Product Add to cart -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-dark fw-bold" href="cart.html">
+                      Add to cart
+                    </a>
+                  </li>
+
+                  <!-- Product Detail -->
+                  <li class="list-inline-item mr-0">
+                    <a class="btn  btn-sm btn-outline-danger btn-dark" href="product_detail.html">
+                      <i class="fa fa-info p-1"></i>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-highlight">
+              <h6>
+                <!-- Product title -->
+                <a class="text-decoration-none product-title fw-bold" href="product_detail.html">
+                      Fashion Sexiest Mock Neck Ribbed Bodycon Dress
+                </a>
+
+                <!-- Product Price -->
+                <h5 class="small fw-bold pb-2">$250</h5>
+
+              </h6>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Single Product Cont -->
+        <div class="product text-center p-1">
+          <div class="product-cont rounded">
+            <div class="mb-3 position-relative">
+
+              <a class="d-block" href="product_detail.html">
+                <!-- Product Image -->
+                <img class="img-fluid w-100 h-100 rounded-top" src="images/dress.jpg" alt="Product image">
+              </a>
+
+              <div class="product-overlay">
+                <ul class="mb-0 list-inline">
+
+                  <!-- Product Like Button/ Add to Wishlist -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-danger btn-dark" href="#">
+                      <i class="fa fa-heart"></i>
+                    </a>
+                  </li>
+
+                  <!-- Product Add to cart -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-dark fw-bold" href="cart.html">
+                      Add to cart
+                    </a>
+                  </li>
+
+                  <!-- Product Detail -->
+                  <li class="list-inline-item mr-0">
+                    <a class="btn  btn-sm btn-outline-danger btn-dark" href="product_detail.html">
+                      <i class="fa fa-info p-1"></i>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-highlight">
+              <h6>
+                <!-- Product title -->
+                <a class="text-decoration-none product-title fw-bold" href="product_detail.html">
+                      Fashion Sexiest Mock Neck Ribbed Bodycon Dress
+                </a>
+
+                <!-- Product Price -->
+                <h5 class="small fw-bold pb-2">$250</h5>
+
+              </h6>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Single Product Cont -->
+        <div class="product text-center p-1">
+          <div class="product-cont rounded">
+            <div class="mb-3 position-relative">
+
+              <a class="d-block" href="product_detail.html">
+                <!-- Product Image -->
+                <img class="img-fluid w-100 h-100 rounded-top" src="images/dress.jpg" alt="Product image">
+              </a>
+
+              <div class="product-overlay">
+                <ul class="mb-0 list-inline">
+
+                  <!-- Product Like Button/ Add to Wishlist -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-danger btn-dark" href="#">
+                      <i class="fa fa-heart"></i>
+                    </a>
+                  </li>
+
+                  <!-- Product Add to cart -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-dark fw-bold" href="cart.html">
+                      Add to cart
+                    </a>
+                  </li>
+
+                  <!-- Product Detail -->
+                  <li class="list-inline-item mr-0">
+                    <a class="btn  btn-sm btn-outline-danger btn-dark" href="product_detail.html">
+                      <i class="fa fa-info p-1"></i>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-highlight">
+              <h6>
+                <!-- Product title -->
+                <a class="text-decoration-none product-title fw-bold" href="product_detail.html">
+                      Fashion Sexiest Mock Neck Ribbed Bodycon Dress
+                </a>
+
+                <!-- Product Price -->
+                <h5 class="small fw-bold pb-2">$250</h5>
+
+              </h6>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Single Product Cont -->
+        <div class="product text-center p-1">
+          <div class="product-cont rounded">
+            <div class="mb-3 position-relative">
+
+              <a class="d-block" href="product_detail.html">
+                <!-- Product Image -->
+                <img class="img-fluid w-100 h-100 rounded-top" src="images/dress.jpg" alt="Product image">
+              </a>
+
+              <div class="product-overlay">
+                <ul class="mb-0 list-inline">
+
+                  <!-- Product Like Button/ Add to Wishlist -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-danger btn-dark" href="#">
+                      <i class="fa fa-heart"></i>
+                    </a>
+                  </li>
+
+                  <!-- Product Add to cart -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-dark fw-bold" href="cart.html">
+                      Add to cart
+                    </a>
+                  </li>
+
+                  <!-- Product Detail -->
+                  <li class="list-inline-item mr-0">
+                    <a class="btn  btn-sm btn-outline-danger btn-dark" href="product_detail.html">
+                      <i class="fa fa-info p-1"></i>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-highlight">
+              <h6>
+                <!-- Product title -->
+                <a class="text-decoration-none product-title fw-bold" href="product_detail.html">
+                      Fashion Sexiest Mock Neck Ribbed Bodycon Dress
+                </a>
+
+                <!-- Product Price -->
+                <h5 class="small fw-bold pb-2">$250</h5>
+
+              </h6>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Single Product Cont -->
+        <div class="product text-center p-1">
+          <div class="product-cont rounded">
+            <div class="mb-3 position-relative">
+
+              <a class="d-block" href="product_detail.html">
+                <!-- Product Image -->
+                <img class="img-fluid w-100 h-100 rounded-top" src="images/dress.jpg" alt="Product image">
+              </a>
+
+              <div class="product-overlay">
+                <ul class="mb-0 list-inline">
+
+                  <!-- Product Like Button/ Add to Wishlist -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-danger btn-dark" href="#">
+                      <i class="fa fa-heart"></i>
+                    </a>
+                  </li>
+
+                  <!-- Product Add to cart -->
+                  <li class="list-inline-item m-0 p-0">
+                    <a class="btn btn-sm btn-outline-dark fw-bold" href="cart.html">
+                      Add to cart
+                    </a>
+                  </li>
+
+                  <!-- Product Detail -->
+                  <li class="list-inline-item mr-0">
+                    <a class="btn  btn-sm btn-outline-danger btn-dark" href="product_detail.html">
+                      <i class="fa fa-info p-1"></i>
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-highlight">
+              <h6>
+                <!-- Product title -->
+                <a class="text-decoration-none product-title fw-bold" href="product_detail.html">
+                      Fashion Sexiest Mock Neck Ribbed Bodycon Dress
+                </a>
+
+                <!-- Product Price -->
+                <h5 class="small fw-bold pb-2">$250</h5>
+
+              </h6>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div id="controls">
+        <center>
+          <i class="auto d-none text-light"></i>
+          <i class="btn btn-outline-0 previous fa fa-chevron-left p-2 text-danger" aria-hidden="true"></i>
+          <i class="btn btn-outline-0 next fa fa-chevron-right p-2 text-danger" aria-hidden="true"></i>
+        </center>
+      </div>
+
+    </div>
+
+{% endblock %}

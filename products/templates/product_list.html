@@ -145,7 +145,7 @@
                 <div class="bg-highlight">
                   <h6>
                     <!-- Product title -->
-                    <a class="text-decoration-none product-title fw-bold" href="product_detail.html">
+                    <a class="text-decoration-none product-title fw-bold" href="{{ product.get_absolute_url }}">
                       {{product.name}}
                     </a>
 
@@ -165,21 +165,26 @@
         <!-- Pagination -->
         <nav aria-label="Page navigation example">
           <ul class="pagination  justify-content-center fw-bold">
-            <li class="page-item">
-              <a class="page-link text-dark" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
+            {% if page.has_previous %}
+              <li class="page-item">
+                <a class="page-link text-dark" href="?page={{page.previous_page_number}}" aria-label="Previous">
+                  <span aria-hidden="true">Previous</span>
+                </a>
+              </li>
+            {% endif %}
 
-            <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
-            <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
+              <span class="current">
+                  Page {{page.number}} of {{page.paginator.num_pages}}
+              </span>
 
-            <li class="page-item">
-              <a class="page-link text-dark" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
+            {% if page.has_next %}
+              <li class="page-item">
+                <a class="page-link text-dark" href="#" aria-label="Next">
+                  <span aria-hidden="true">Next</span>
+                </a>
+              </li>
+            {% endif %}
+
           </ul>
         </nav>
         </div>

@@ -47,10 +47,10 @@
             <div class="col-lg-6 text-center">
               <ul class="menu list-inline">
                 <li class="list-inline-item pe-2 border border-2 border-danger border-top-0 border-start-0 border-bottom-0 top-nav-links">
-                  <a href="login.html"  class="text-decoration-none fw-bold">Login</a>
+                  <a href="{% url 'account:login' %}"  class="text-decoration-none fw-bold">Login</a>
                 </li>
                 <li class="list-inline-item  pe-2 border border-2 border-danger border-top-0 border-start-0 border-bottom-0 top-nav-links">
-                  <a href="register.html" class="text-decoration-none fw-bold">Register</a>
+                  <a href="{% url 'account:register' %}" class="text-decoration-none fw-bold">Register</a>
                 </li>
                 <li class="list-inline-item  pe-2 border border-2 border-danger border-top-0 border-start-0 border-bottom-0 top-nav-links">
                   <a href="contact.html" class="text-decoration-none fw-bold">Contact</a></li>
@@ -119,7 +119,7 @@
 
       <nav class="navbar main-nav navbar-light navbar-expand-lg rounded-bottom">
         <div class="container-fluid">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="{% url 'products:index' %}">
             <!-- Nav bar logo -->
             <img src="{% static 'images/logo.png ' %}" class="nav-img">
           </a>
@@ -127,7 +127,7 @@
           <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
 
-              <a class="offcanvas-title" href="index.html">
+              <a class="offcanvas-title" href="{% url 'products:index' %}">
                 <!-- Nav bar logo -->
                 <img src="{% static 'images/logo.png ' %}" class="nav-img">
               </a>
@@ -140,10 +140,11 @@
                 <div class="navbar-nav justify-content-center flex-grow-1 pe-3">
 
                   <div class="nav-link">
-                    <a class=" fw-bold fs-4 text-decoration-none nav-head" href="index.html">Home</a>
+                    <a class=" fw-bold fs-4 text-decoration-none nav-head" href="{% url 'products:index' %}">Home</a>
                   </div>
                   <div class="nav-link">
-                    <a class=" fw-bold fs-4 text-decoration-none nav-head" href="products.html">Products</a>
+                    <a class=" fw-bold fs-4 text-decoration-none nav-head" href="{% url 'products:product_list' %}">
+                      Products</a>
                   </div>
                   <div class="nav-link">
                     <a class=" fw-bold fs-4 text-decoration-none nav-head" href="blog.html">Fashion Blog</a>
