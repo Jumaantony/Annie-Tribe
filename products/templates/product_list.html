@@ -165,7 +165,7 @@
         <!-- Pagination -->
         <nav aria-label="Page navigation example">
           <ul class="pagination  justify-content-center fw-bold">
-            {% if page.has_previous %}
+            {% if page_obj.has_previous %}
               <li class="page-item">
                 <a class="page-link text-dark" href="?page={{page.previous_page_number}}" aria-label="Previous">
                   <span aria-hidden="true">Previous</span>
@@ -174,10 +174,10 @@
             {% endif %}
 
               <span class="current">
-                  Page {{page.number}} of {{page.paginator.num_pages}}
+                  Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
               </span>
 
-            {% if page.has_next %}
+            {% if page_obj.has_next %}
               <li class="page-item">
                 <a class="page-link text-dark" href="#" aria-label="Next">
                   <span aria-hidden="true">Next</span>

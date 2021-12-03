@@ -18,20 +18,20 @@ def product_list(request, category_slug=None):
         products = products.filter(category=category)
 
     paginator = Paginator(products, 32)
-    page = request.GET.get('page')
+    page_num = request.GET.get('page')
 
     try:
-        products = paginator.page(page)
+        page_obj = paginator.get_page(page_num)
     except PageNotAnInteger:
-        products = paginator.page(1)
+        page_obj = paginator.get_page(1)
     except EmptyPage:
-        products = paginator.page(paginator.num_pages)
+        page_obj = paginator.get_page(paginator.num_pages)
 
     contxt = {
         'category': category,
         'categories': categories,
         'products': products,
-        'page': page,
+        'page_obj': page_obj,
     }
     return render(request, 'product_list.html', contxt)
 
