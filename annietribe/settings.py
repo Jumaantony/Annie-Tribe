@@ -58,10 +58,11 @@ INSTALLED_APPS = [
     # Products app
     'products.apps.ProductsConfig',
 
+    # cart app
+    'cart.apps.CartConfig',
 
     # third party packages
     'crispy_forms',
-
 
     'django.contrib.admin',
     'django.contrib.auth',
