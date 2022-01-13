@@ -34,7 +34,4 @@ urlpatterns = [
 
     # registration view
     path('register/', views.register, name='register'),
-
-
-
 ]

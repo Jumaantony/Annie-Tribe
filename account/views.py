@@ -3,8 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
-from django.urls import reverse_lazy
-
 from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
 from .models import Profile
 

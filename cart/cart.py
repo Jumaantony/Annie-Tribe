@@ -3,5 +3,5 @@ from django.conf import settings
 from products.models import Product
 
 
-class Cart(object):
-    def __int__(self, request):
+"""class Cart(object):
+    def __int__(self, request):"""
