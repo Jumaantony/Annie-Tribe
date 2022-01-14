@@ -64,14 +64,20 @@
 
 
               <!-- Cart -->
-              <a href="cart.html" class=" text-decoration-none top-nav-icon">
+              <a href="{% url 'cart:cart_detail' %}" class=" text-decoration-none top-nav-icon">
                 <i class="fa fa-shopping-cart px-1 py-1 fs-3">
 
                 </i>
 
                 <!-- Cart Item cont-->
                 <span class="top-0 bottom-2 start-45 translate-middle badge rounded-pill cart-count">
-                  10
+                  {% with total_items=cart|length %}
+                    {% if total_items > 0 %}
+                      {{ total_items }}
+                    {% else %}
+                        0
+                    {% endif %}
+                {% endwith %}
                 </span>
               </a>
 
