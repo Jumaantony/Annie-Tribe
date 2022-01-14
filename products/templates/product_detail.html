@@ -97,9 +97,11 @@
           {{ product.price }}
         </h4>
 
-        <a class="btn btn-md btn-dark btn-outline-danger fw-bold mt-2 w-75" href="cart.html">
-          Add to cart
-        </a>
+        <form action="{% url 'cart:cart_add' product.id %}" method="post">
+          {{ cart_product_form }}
+          {% csrf_token %}
+          <input class="btn btn-md btn-dark btn-outline-danger fw-bold mt-2 w-75" type="submit" value="Add to cart">
+        </form>
 
         <h6 class="pt-3 fw-bold">Share This Product ;</h6>
 

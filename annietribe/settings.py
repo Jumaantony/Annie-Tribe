@@ -81,6 +81,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# cart sessions
+CART_SESSION_ID = 'cart'
+
 ROOT_URLCONF = 'annietribe.urls'
 
 TEMPLATES = [
@@ -95,6 +98,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'products.context_processors.categories',
+                'cart.context_processors.cart',
             ],
         },
     },
@@ -132,7 +136,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # REdirect URLS
 LOGIN_REDIRECT_URL = 'account:dashboard'
-LOGIN_URL = 'login'
+LOGIN_URL = 'account:login'
 LOGOUT_URL = 'logout'
 # LOGOUT_REDIRECT_URL = ''
 
