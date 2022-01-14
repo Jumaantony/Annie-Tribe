@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Category, Product
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from cart.forms import CartAddProductForm
+from wishlist.forms import WishlistAddProductForm
 
 
 # Create your views here.
@@ -41,6 +42,7 @@ def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id,
                                 slug=slug)
     cart_product_form = CartAddProductForm()
+    wishlist_product_form = WishlistAddProductForm()
     return render(request, 'product_detail.html',
                   {'product': product,
-                   'cart_product_form': cart_product_form})
+                   'wishlist_product_form': wishlist_product_form,})

@@ -60,6 +60,9 @@ INSTALLED_APPS = [
     # cart app
     'cart.apps.CartConfig',
 
+    # wishlist app
+    'wishlist.apps.WishlistConfig',
+
     # third party packages
     'crispy_forms',
 
@@ -84,6 +87,9 @@ MIDDLEWARE = [
 # cart sessions
 CART_SESSION_ID = 'cart'
 
+# wishlist sessions
+WISHLIST_SESSION_ID = 'wishlist'
+
 ROOT_URLCONF = 'annietribe.urls'
 
 TEMPLATES = [
@@ -99,6 +105,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'products.context_processors.categories',
                 'cart.context_processors.cart',
+                'wishlist.context_processors.wishlist',
             ],
         },
     },

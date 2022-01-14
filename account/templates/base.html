@@ -91,7 +91,7 @@
                   {% if request.user.is_authenticated %}
                     <li><a class="dropdown-item fw-bold" href="account.html">Account</a></li>
                     <li><a class="dropdown-item fw-bold" href="order-history.html">Orders</a></li>
-                    <li><a class="dropdown-item fw-bold" href="wishlist.html">Wish List</a></li>
+                    <li><a class="dropdown-item fw-bold" href="{% url 'wishlist:wishlist_detail' %}">Wish List</a></li>
                     <li>
                       <a href="{% url 'account:logout' %}"
                          class="btn btn-md btn-dark btn-outline-danger border-0 fw-bold">
@@ -177,7 +177,7 @@
                   {% if request.user.is_authenticated %}
                     <li><a class="dropdown-item fw-bold" href="account.html">Account</a></li>
                     <li><a class="dropdown-item fw-bold" href="order-history.html">Orders</a></li>
-                    <li><a class="dropdown-item fw-bold" href="wishlist.html">Wish List</a></li>
+                    <li><a class="dropdown-item fw-bold" href="{% url 'wishlist:wishlist_detail' %}">Wish List</a></li>
                     <li>
                       <a href="{% url 'account:logout' %}"
                          class="btn btn-md btn-dark btn-outline-danger border-0 fw-bold">

@@ -71,9 +71,14 @@
           {{product.name}}
         </h5>
 
-        <a class="text-danger" href="wishlist.html">
-          <i class="fa fa-heart pb-2"> Add to WishList</i>
-        </a>
+        <form action="{% url 'wishlist:wishlist_add' product.id %}" method="post">
+          {{ wishlist_product_form }}
+          {% csrf_token %}
+            <i class="fa fa-heart pb-2">
+              <input class="btn-no-outline text-danger fw-bold mt-2 w-75" type="submit" value="Wishlist">
+            </i>
+          </input>
+        </form>
 
         <p class="bg-dark text-light w-50 text-center py-1 fw-bold rounded"> Countrywide Delivery</p>
 
