@@ -145,7 +145,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LOGIN_REDIRECT_URL = 'account:dashboard'
 LOGIN_URL = 'account:login'
 LOGOUT_URL = 'logout'
-# LOGOUT_REDIRECT_URL = ''
+LOGOUT_REDIRECT_URL = 'products:index'
 
 
 # Internationalization

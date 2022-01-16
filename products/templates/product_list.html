@@ -119,16 +119,25 @@
 
                       <!-- Product Like Button/ Add to Wishlist -->
                       <li class="list-inline-item m-0 p-0">
-                        <a class="btn btn-sm btn-outline-danger btn-dark" href="#">
-                          <i class="fa fa-heart"></i>
-                        </a>
+
+                        <form action="{% url 'wishlist:wishlist_add' product.id %}" method="post">
+                          {{ wishlist_product_form }}
+                          {% csrf_token %}
+                          <button class="btn btn-sm btn-outline-danger btn-dark" type="submit">
+                            <i class=" fa fa-heart"></i>
+                          </button>
+                        </form>
                       </li>
 
                       <!-- Product Add to cart -->
                       <li class="list-inline-item m-0 p-0">
-                        <a class="btn btn-sm btn-outline-dark fw-bold" href="cart.html">
-                          Buy
-                        </a>
+                        <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                          {{ cart_product_form }}
+                          {% csrf_token %}
+                          <button class="btn btn-sm btn-outline-dark fw-bold" type="submit">
+                            Buy
+                          </button>
+                        </form>
                       </li>
 
                       <!-- Product Detail -->

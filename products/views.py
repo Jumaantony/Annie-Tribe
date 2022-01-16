@@ -29,11 +29,17 @@ def product_list(request, category_slug=None):
     except EmptyPage:
         page_obj = paginator.get_page(paginator.num_pages)
 
+    # wishlist and cart form
+    cart_product_form = CartAddProductForm()
+    wishlist_product_form = WishlistAddProductForm()
+
     contxt = {
         'category': category,
         'categories': categories,
         'products': products,
         'page_obj': page_obj,
+        'cart_product_form': cart_product_form,
+        'wishlist_product_form': wishlist_product_form,
     }
     return render(request, 'product_list.html', contxt)
 
@@ -41,8 +47,12 @@ def product_list(request, category_slug=None):
 def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id,
                                 slug=slug)
+
+    # wishlist and cart form
     cart_product_form = CartAddProductForm()
     wishlist_product_form = WishlistAddProductForm()
+
     return render(request, 'product_detail.html',
                   {'product': product,
-                   'wishlist_product_form': wishlist_product_form,})
+                   'cart_product_form': cart_product_form,
+                   'wishlist_product_form': wishlist_product_form, })
