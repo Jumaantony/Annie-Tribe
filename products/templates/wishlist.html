@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    My Wishlist
+{% endblock %}
+
+{% block content %}
+
+    <div class="account-cont mt-2">
+      <div role="tabpanel row border">
+        <!-- List group -->
+        <div class="row gx-4">
+
+          <div class="col-4">
+
+            <div class="list-group list-group-cont" id="myList" role="tablist">
+
+              <a class="list-group-item list-group-item-action fw-bold" data-bs-toggle="{% url 'account:dashboard' %}" href="{% url 'account:dashboard' %}" role="tab">
+                <i class="fa fa-address-card fs-3" aria-hidden="true"> </i>
+                Account Details
+              </a>
+
+              <a class="list-group-item list-group-item-action fw-bold" data-bs-toggle="order-history.html" href="order-history.html" role="tab">
+                <i class="fa fa-shopping-bag fs-3" aria-hidden="true"> </i>
+                Orders</a>
+
+              <a class="list-group-item active list-group-item-action fw-bold" data-bs-toggle="{% url 'wishlist:wishlist_detail' %}" href="{% url 'wishlist:wishlist_detail' %}" role="tab">
+                <i class="fa fa-heart fs-3" aria-hidden="true"> </i>
+                Wish List
+              </a>
+
+              <a class="list-group-item list-group-item-action fw-bold" data-bs-toggle="recently-viewed.html" href="recently-viewed.html" role="tab">
+                <i class="fa fa-history fs-3" aria-hidden="true"> </i>
+                Recently Viewed Items
+              </a>
+
+              <a class="list-group-item list-group-item-action fw-bold pt-2" data-bs-toggle="change_password.html" href="change_password.html" role="tab">
+                <i class="fa fa-unlock fs-3" aria-hidden="true"> </i>
+                Reset Password
+              </a>
+
+            </div>
+
+          </div>
+
+          <div class="col-8">
+            <!-- Tab panes -->
+            <div class="tab-content tab-cont p-2">
+
+              <div class="tab-pane fade active show p-2" id="wishlist" role="tabpanel">
+                <h4 class="fw-bolder list-group-item border-start-0 border-top-0 border-end-0">
+                  Saved Items
+                </h4>
+
+                <div class="table-responsive">
+                  <!-- Single saved Item  -->
+                  <table class="table border-danger">
+                    <tbody>
+
+                      <!-- Single Wishlist -->
+                      {% for item in wishlist %}
+                        {% with product=item.product %}
+                          <tr class="align-middle">
+                            <th scope="row">
+                              <a href="{{ product.get_absolute_url }}">
+                                <!--Saved image -->
+                                <img src="{{ product.photo.url }}" class="saved-item-img">
+                              </a>
+                            </th>
+
+                            <td>
+                              <!-- Saved Name -->
+                              <a href="{{ product.get_absolute_url }}" class="text-decoration-none fw-bold text-dark">
+                                {{product.name}}
+                              </a>
+
+                              <br>
+
+                              <!-- Unit Price -->
+                              <h6 class="fw-bold mt-3"><span>Ksh: </span> {{product.price}}</h6>
+                            </td>
+
+                            <td>
+                              <a class="btn btn-md btn-light btn-outline-dark fw-bold text-nowrap" href="">
+                                Buy Now
+                              </a>
+
+                              <!-- Remove Product from saved items
+                              <form action="{% url 'wishlist:wishlist_remove' product.id %}" method="post" class="d-flex mt-4">
+                                <button type="submit" name="Remove" class="fw-bold btn btn-danger btn-outline-dark border-0 btn-md">
+                                  Remove
+                                </button>
+                                {% csrf_token %}
+                              </form>
+                              -->
+                            </td>
+                          </tr>
+                        {% endwith %}
+                      {% endfor %}
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
