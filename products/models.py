@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.urls import reverse
@@ -36,6 +37,7 @@ class Product(models.Model):
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    users_wishlist = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="user_wishlist", blank=True)
 
     class Meta:
         ordering = ('name',)

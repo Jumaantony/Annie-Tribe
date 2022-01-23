@@ -46,19 +46,6 @@ input, select{
           <div class="col-8">
             <!-- Tab panes -->
             <div class="tab-content tab-cont p-2">
-
-              <!-- Display Message on Updating Profile -->
-              {% for message in messages %}
-                <div class="container-fluid p-0">
-                  {% if message.tags %}
-                    <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
-                      {{ message }}
-                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                  {% endif %}
-                </div>
-              {% endfor %}
-
               <div class="tab-pane  fade active show" id="details" role="tabpanel">
 
                 <h4 class="fw-bolder list-group-item border-start-0 border-top-0 border-end-0">Details</h4>

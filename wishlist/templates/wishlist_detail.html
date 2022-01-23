@@ -26,7 +26,7 @@
                 <i class="fa fa-shopping-bag fs-3" aria-hidden="true"> </i>
                 Orders</a>
 
-              <a class="list-group-item active list-group-item-action fw-bold" data-bs-toggle="{% url 'wishlist:wishlist_detail' %}" href="{% url 'wishlist:wishlist_detail' %}" role="tab">
+              <a class="list-group-item active list-group-item-action fw-bold" data-bs-toggle="{% url 'wishlist:wishlist' %}" href="{% url 'wishlist:wishlist' %}" role="tab">
                 <i class="fa fa-heart fs-3" aria-hidden="true"> </i>
                 Wish List
               </a>
@@ -67,8 +67,8 @@
                     <tbody>
 
                       <!-- Single Wishlist -->
-                      {% for item in wishlist %}
-                        {% with product=item.product %}
+                      {% if wishlist %}
+                        {% for product in wishlist %}
                           <tr class="align-middle">
                             <th scope="row">
                               <a href="{{ product.get_absolute_url }}">
@@ -94,17 +94,14 @@
                                 Buy Now
                               </a>
 
-                              <!-- Remove Product from saved items -->
-                              <form action="{% url 'wishlist:wishlist_remove' product.id %}" method="post" class="d-flex mt-4">
-                                <button type="submit" name="Remove" class="fw-bold btn btn-danger btn-outline-dark border-0 btn-md">
-                                  Remove
-                                </button>
-                                {% csrf_token %}
-                              </form>
+                              <br>
+                              <a href="{% url 'wishlist:add_to_wishlist' product.id  %}" class="btn btn-md btn-outline-dark btn-danger mt-1 fw-bold text-light" role="button" aria-disabled="true">
+                                Remove
+                              </a>
                             </td>
                           </tr>
-                        {% endwith %}
-                      {% endfor %}
+                        {% endfor %}
+                      {% endif %}
 
                     </tbody>
                   </table>

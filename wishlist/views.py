@@ -1,34 +1,24 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.http import require_POST
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
 from products.models import Product
-from .wishlist import Wishlist
-from .forms import WishlistAddProductForm
 
 
 @login_required
-@require_POST
-def wishlist_add(request, product_id):
-    wishlist = Wishlist(request)
-    product = get_object_or_404(Product, id=product_id)
-    form = WishlistAddProductForm(request.POST)
-    if form.is_valid():
-        wishlist.add(product=product)
-    return redirect('wishlist:wishlist_detail')
-
-
-@login_required
-@require_POST
-def wishlist_remove(request, product_id):
-    wishlist = Wishlist(request)
-    product = get_object_or_404(Product, id=product_id)
-    wishlist.remove(product)
-    return redirect('wishlist:wishlist_detail')
-
-
-@login_required
-def wishlist_detail(request):
-    wishlist = Wishlist(request)
+def wishlist(request):
+    products = Product.objects.filter(users_wishlist=request.user)
     return render(request, 'wishlist_detail.html',
-                  {'wishlist': wishlist})
+                  {"wishlist": products})
 
+
+@login_required
+def add_to_wishlist(request, id):
+    product = get_object_or_404(Product, id=id)
+    if product.users_wishlist.filter(id=request.user.id).exists():
+        product.users_wishlist.remove(request.user)
+        messages.success(request, product.name + " has been removed from your WishList")
+    else:
+        product.users_wishlist.add(request.user)
+        messages.success(request, "Added " + product.name + " to your WishList")
+    return HttpResponseRedirect(request.META["HTTP_REFERER"])
