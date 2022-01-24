@@ -89,7 +89,7 @@
 
                 <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink">
                   {% if request.user.is_authenticated %}
-                    <li><a class="dropdown-item fw-bold" href="account.html">Account</a></li>
+                    <li><a class="dropdown-item fw-bold" href="{% url 'account:dashboard' %}">Account</a></li>
                     <li><a class="dropdown-item fw-bold" href="order-history.html">Orders</a></li>
                     <li><a class="dropdown-item fw-bold" href="{% url 'wishlist:wishlist' %}">Wish List</a></li>
                     <li>
@@ -175,7 +175,7 @@
 
               <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink">
                   {% if request.user.is_authenticated %}
-                    <li><a class="dropdown-item fw-bold" href="account.html">Account</a></li>
+                    <li><a class="dropdown-item fw-bold" href="{% url 'account:dashboard' %}">Account</a></li>
                     <li><a class="dropdown-item fw-bold" href="order-history.html">Orders</a></li>
                     <li><a class="dropdown-item fw-bold" href="{% url 'wishlist:wishlist' %}">Wish List</a></li>
                     <li>

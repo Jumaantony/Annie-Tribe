@@ -63,6 +63,12 @@ INSTALLED_APPS = [
     # wishlist app
     'wishlist.apps.WishlistConfig',
 
+    # coupon
+    'coupon.apps.CouponConfig',
+
+    # Orders app
+    'orders.apps.OrdersConfig',
+
     # third party packages
     'crispy_forms',
 
@@ -105,7 +111,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'products.context_processors.categories',
                 'cart.context_processors.cart',
-                # 'wishlist.context_processors.wishlist',
             ],
         },
     },
