@@ -71,6 +71,7 @@ INSTALLED_APPS = [
 
     # third party packages
     'crispy_forms',
+    'phonenumber_field',
 
     'django.contrib.admin',
     'django.contrib.auth',
