@@ -97,12 +97,15 @@
           {{ product.price }}
         </h4>
 
-        <form action="{% url 'cart:cart_add' product.id %}" method="post">
-          {{ cart_product_form }}
-          {% csrf_token %}
-          <input class="btn btn-md btn-dark btn-outline-danger fw-bold mt-2 w-75" type="submit" value="Add to cart">
-        </form>
-
+        {% if product.available == True %}
+          <form action="{% url 'cart:cart_add' product.id %}" method="post">
+            {{ cart_product_form }}
+            {% csrf_token %}
+            <input class="btn btn-md btn-dark btn-outline-danger fw-bold mt-2 w-75" type="submit" value="Add to cart">
+          </form>
+        {% else %}
+           <input class="btn btn-md btn-dark btn-outline-danger fw-bold mt-2 w-75" type="submit" value="Out of Stock">
+        {% endif %}
         <h6 class="pt-3 fw-bold">Share This Product ;</h6>
 
         <a href="" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-outline-danger text-decoration-none fw-bolder share-btn text-center share-product">

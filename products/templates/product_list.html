@@ -124,16 +124,22 @@
                         </a>
                       </li>
 
-                      <!-- Product Add to cart -->
-                      <li class="list-inline-item m-0 p-0">
-                        <form action="{% url 'cart:cart_add' product.id %}" method="post">
-                          {{ cart_product_form }}
-                          {% csrf_token %}
-                          <button class="btn btn-sm btn-outline-dark fw-bold" type="submit">
-                            Buy
-                          </button>
-                        </form>
-                      </li>
+                      {% if product.available == True %}
+                        <!-- Product Add to cart -->
+                        <li class="list-inline-item m-0 p-0">
+                          <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                            {{ cart_product_form }}
+                            {% csrf_token %}
+                            <button class="btn btn-sm btn-outline-dark fw-bold" type="submit">
+                              Buy
+                            </button>
+                          </form>
+                        </li>
+                      {% else %}
+                        <button class="btn btn-sm btn-outline-dark fw-bold" type="submit">
+                          Out of Stock
+                        </button>
+                      {% endif %}
 
                       <!-- Product Detail -->
                       <li class="list-inline-item mr-0">
@@ -150,7 +156,7 @@
                   <h6>
                     <!-- Product title -->
                     <a class="text-decoration-none product-title fw-bold" href="{{ product.get_absolute_url }}">
-                      {{product.name}}
+                      {{product.name | truncatewords_html:3}}
                     </a>
 
                     <!-- Product Price -->
