@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import OrderItem
-from .forms import OrderCreateForm
+from .forms import OrderCreateForm, UserEditForm
 from cart.cart import Cart
 
 
@@ -8,9 +8,14 @@ from cart.cart import Cart
 def order_create(request):
     cart = Cart(request)
     if request.method == 'POST':
-        form = OrderCreateForm(request.POST)
-        if form.is_valid():
-            order = form.save()
+        user_form = UserEditForm(instance=request.user,
+                                 data=request.POST)
+        order_form = OrderCreateForm(request.POST)
+        if order_form.is_valid() and user_form.is_valid():
+            user_form.save()
+            order = order_form.save(commit=False)
+            order.user = request.user
+            order.save()
             for item in cart:
                 OrderItem.objects.create(order=order,
                                          product=item['product'],
@@ -22,6 +27,8 @@ def order_create(request):
             return render(request, 'created.html',
                           {'order': order, })
     else:
-        form = OrderCreateForm()
+        order_form = OrderCreateForm()
+        user_form = UserEditForm(instance=request.user)
     return render(request, 'create.html', {'cart': cart,
-                                           'form': form, })
+                                           'order_form': order_form,
+                                           'user_form': user_form, })

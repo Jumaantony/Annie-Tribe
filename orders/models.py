@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.contrib.auth import get_user_model
 from products.models import Product
@@ -6,9 +7,13 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 class Order(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField()
+    order_status_choices = (
+        ('Pending', 'Pending'),
+        ('En_route', 'En_route'),
+        ('Delivered', 'Delivered'),
+    )
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,
+                                on_delete=models.CASCADE)
     phone_number = PhoneNumberField()
     county = models.CharField(max_length=100)
     town = models.CharField(max_length=100)
@@ -17,6 +22,9 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
+    order_status = models.CharField(max_length=10,
+                                    choices=order_status_choices,
+                                    default='Pending',)
 
     class Meta:
         ordering = ('-created',)
