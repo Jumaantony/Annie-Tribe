@@ -65,7 +65,7 @@
         <!-- categories end -->
       </div>
 
-      <div class="col-lg-9 col-md-9 col-sm-12">
+      <div class="col-lg-9 col-md-9 col-sm-12" id="products">
         <h2 class="fw-bold">
           {% if category %}
             {{ category.name }}
@@ -73,34 +73,43 @@
             Products
           {% endif %}
         </h2>
+
         <!-- Sorting Options -->
         <div class="row justify-content-end float-top">
           <div class="input-group mb-3 w-auto">
-            <select class="form-select form-select-danger" id="inputGroupSelect01">
-              <option value="1" style="*hover: background-color: red ;">
-                <a href="#" class="text-decoration-none">
-                  Default Sorting
-                </a>
-              </option>
-              <option value="2">
-                <a href="#" class="text-decoration-none">
-                  Price: Low - High
-                </a>
-              </option>
-              <option value="3">
-                <a href="#" class="text-decoration-none">
-                  Price: High - Low
-                </a>
-              </option>
-            </select>
+            <div class="input-group mb-3">
+              <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sort Products
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <button class="text-decoration-none dropdown-item sort" data-sort="created">
+                    Default Sorting
+                  </button>
+                </li>
 
+                <li>
+                  <button class="text-decoration-none dropdown-item sort" data-sort="price">
+                    Sort by Price
+                  </button>
+                </li>
+
+                <!--
+                <li>
+                  <button class="text-decoration-none dropdown-item sort" data-sort="name">
+                    Default Sorting
+                  </button>
+                </li>
+                -->
+
+              </ul>
+            </div>
           </div>
-
         </div>
         <!-- Sorting Options End -->
 
         <!-- All Products -->
-        <div class="row justify-content-center">
+        <div class="row justify-content-center list">
           <!-- Single Product Start -->
           {% for product in products %}
           <div class="col-lg-3 col-md-4 col-sm-4 col-6">
@@ -155,13 +164,15 @@
                 <div class="bg-highlight">
                   <h6>
                     <!-- Product title -->
-                    <a class="text-decoration-none product-title fw-bold" href="{{ product.get_absolute_url }}">
+                    <a class="text-decoration-none product-title fw-bold name" href="{{ product.get_absolute_url }}">
                       {{product.name | truncatewords_html:3}}
                     </a>
 
                     <!-- Product Price -->
-                    <h5 class="small fw-bold pb-2">Ksh: {{ product.price }}</h5>
+                    <h5 class="small fw-bold pb-2 price">Ksh: {{ product.price }}</h5>
 
+                    <!-- Product created date though it is hidden. it is only used for sorting-->
+                    <h5 class="small fw-bold pb-2 created d-none">Ksh: {{ product.created }}</h5>
                   </h6>
                 </div>
 
@@ -202,5 +213,15 @@
       </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
+
+<script>
+  var options = {
+  valueNames: [ 'price', 'name', 'created']
+  };
+
+  var productList = new List('products', options);
+</script>
 
 {% endblock %}
