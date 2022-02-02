@@ -7,6 +7,32 @@
 {% endblock %}
 
 {% block content %}
+<style>
+label{
+  font-weight: bold;
+  }
+
+.help-block{
+color: red;
+}
+
+input{
+    width: 100%;
+    padding: 0.2rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+</style>
     <div class="cart-cont table-responsive mt-2">
       <table class="table table-dark table-hover border-danger">
         <thead>
@@ -79,25 +105,37 @@
 
     <div class="row justify-content-center container-fluid mt-3">
 
-      <div class="col-lg-6 col-md-6 col-sm-10 text-end cart-total p-3">
-        <h3 class="fw-bold text-center">Order Total Cost</h3>
+      <div class="col-lg-4 col-md-4 col-sm-8  cart-total p-3">
+        {% if cart.coupon %}
+          <h3 class="fw-bold text-center">Order Total Cost</h3>
+          <hr>
 
-        <h5 class="fw-bold">Sub-Total: Ksh: {{ cart.get_total_price}}</h5>
+          <h6 class="fw-bold">Sub-Total
+            <span class="float-end"> Ksh. {{ cart.get_total_price|floatformat:2}} </span>
+          </h6>
 
-        <h5 class="fw-bold text-muted">Coupon: <span class="text-danger">$10</span></h5>
+          <h6 class="fw-bold text-danger">
+            "{{ cart.coupon.code }}"
+            ({{ cart.coupon.discount }}% off)
+
+            <span class="float-end"> - Ksh. {{ cart.get_discount|floatformat:2 }} </span>
+          </h6>
+        {% endif %}
 
         <hr class="text-danger">
-        <h4 class="fw-bold">Total: $240</h4>
+        <h6 class="fw-bold">
+          Total:
+          <span class="float-end"> Ksh. {{ cart.get_total_price_after_discount|floatformat:2 }} </span>
+        </h6>
         <hr class="text-danger">
 
-        <form class="text-center">
-          <input type="text" name="Coupon Code" class="w-100">
-
+        <form class="text-center" action="{% url 'coupons:apply' %}" method="post">
+          {{ coupon_apply_form.code|as_crispy_field }}
           <br>
           <button type="submit" name="Coupon" class="btn btn-dark btn-outline-danger fw-bold mt-1 px-4 w-100">
             <i class="fa fa-gift" aria-hidden="true"> Apply Coupon</i>
           </button>
-
+          {% csrf_token %}
         </form>
 
         <p class="text-center fw-bold mt-2 fst-italic text-muted alert alert-danger" role="alert">Please not that delivery fees is not billed!!</p>

@@ -64,7 +64,7 @@ INSTALLED_APPS = [
     'wishlist.apps.WishlistConfig',
 
     # coupon
-    'coupon.apps.CouponConfig',
+    'coupons.apps.CouponsConfig',
 
     # Orders app
     'orders.apps.OrdersConfig',
