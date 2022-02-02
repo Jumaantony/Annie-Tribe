@@ -12,5 +12,6 @@ class UserEditForm(forms.ModelForm):
 class OrderCreateForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['phone_number', 'county', 'town', 'address',
-                  'postal_code']
+        fields = ['first_name', 'last_name', 'email',
+                  'phone_number', 'county', 'town',
+                  'address', 'postal_code']

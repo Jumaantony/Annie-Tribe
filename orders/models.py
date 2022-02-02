@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.db import models
-from django.contrib.auth import get_user_model
 from products.models import Product
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -11,9 +10,11 @@ class Order(models.Model):
         ('Pending', 'Pending'),
         ('En_route', 'En_route'),
         ('Delivered', 'Delivered'),
+        ('Canceled', 'Canceled'),
     )
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField()
     phone_number = PhoneNumberField()
     county = models.CharField(max_length=100)
     town = models.CharField(max_length=100)
@@ -24,7 +25,7 @@ class Order(models.Model):
     paid = models.BooleanField(default=False)
     order_status = models.CharField(max_length=10,
                                     choices=order_status_choices,
-                                    default='Pending',)
+                                    default='Pending', )
 
     class Meta:
         ordering = ('-created',)
@@ -37,6 +38,8 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,
+                                on_delete=models.CASCADE)
     order = models.ForeignKey(Order,
                               related_name='items',
                               on_delete=models.CASCADE)
