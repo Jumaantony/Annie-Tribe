@@ -22,7 +22,7 @@
                 Account Details
               </a>
 
-              <a class="list-group-item list-group-item-action fw-bold" data-bs-toggle="order-history.html" href="order-history.html" role="tab">
+              <a class="list-group-item list-group-item-action fw-bold" data-bs-toggle="{% url 'orders:order_list' %}" href="{% url 'orders:order_list' %}" role="tab">
                 <i class="fa fa-shopping-bag fs-3" aria-hidden="true"> </i>
                 Orders</a>
 
