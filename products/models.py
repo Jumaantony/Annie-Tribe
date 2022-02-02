@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.urls import reverse
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 # Create your models here.
@@ -32,7 +33,7 @@ class Product(models.Model):
     photo1 = CloudinaryField()
     photo2 = CloudinaryField()
     photo3 = CloudinaryField()
-    description = models.TextField()
+    description = RichTextUploadingField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)

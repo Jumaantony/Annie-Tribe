@@ -39,4 +39,7 @@ urlpatterns = [
                   # products
                   path('', include('products.urls', namespace='products')),
 
+                  # ckeditor
+                  path('ckeditor/', include('ckeditor_uploader.urls')),
+
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
