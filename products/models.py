@@ -6,6 +6,12 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 
 # Create your models here.
+class Banner(models.Model):
+    img1 = CloudinaryField(blank=False)
+    img2 = CloudinaryField(blank=False)
+    img3 = CloudinaryField(blank=True)
+
+
 class Category(models.Model):
     name = models.CharField(max_length=100, db_index=True)
     slug = models.SlugField(max_length=100, unique=True)

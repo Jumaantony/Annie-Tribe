@@ -1,8 +1,13 @@
 from django.contrib import admin
-from .models import Category, Product
+from .models import Category, Product, Banner
 
 
 # Register your models here.
+@admin.register(Banner)
+class BannerAdmin(admin.ModelAdmin):
+    list_display = ['img1', 'img2', 'img3']
+
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug', 'photo', ]
