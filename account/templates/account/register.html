@@ -37,16 +37,18 @@ input{
       <div class="form w-75 mx-auto mt-3">
 
         <!-- Display Message on Creating an Account -->
-        {% for message in messages %}
-          <div class="container-fluid p-2">
-            {% if message.tags %}
-              <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
-                {{ message }}
-                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-            {% endif %}
-          </div>
-        {% endfor %}
+        <cente>
+          {% for message in messages %}
+            <div class="container-fluid p-2">
+              {% if message.tags %}
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                  {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </cente>
         <form method="post" action="" class="p-3">
           <h3 class="pb-2 pt-2 fw-bold">Create an Account</h3>
           {% csrf_token %}

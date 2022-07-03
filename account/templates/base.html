@@ -135,7 +135,7 @@
 
               <a class="offcanvas-title" href="{% url 'products:index' %}">
                 <!-- Nav bar logo -->
-                <img src="{% static 'images/logo.png ' %}" class="nav-img">
+                <img src="{% static 'images/logo.png' %}" class="nav-img">
               </a>
 
               <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -263,8 +263,8 @@
         <div class="col-lg-4 col-md-4 col-sm-12">
           <img src="{% static 'images/logo.png' %}" class="logo">
 
-          <h6 class="text-light pt-1">
-            Anni.Tribe is a fashion ecommerce website and a fashion blog for women and ladies which educates and gives insights on what to wear irregardless of the occassion. <br>
+          <h6 class="text-light fw-bold pt-1">
+            Annie.Tribe is a fashion ecommerce website and a fashion blog for women and ladies which educates and gives insights on what to wear irregardless of the occassion. <br>
             <br>
 
             We provide quality fashion wear at a discounted price.
@@ -318,15 +318,15 @@
           </div>
 
           <div class="user pt-3">
-            <a href="login.html" class="btn fw-bold btn-light btn-outline-danger"> Login </a>
-            <a href="register.html" class="btn fw-bold btn-light btn-outline-danger"> Register </a>
+            <a href="{% url 'account:login' %}" class="btn fw-bold btn-light btn-outline-danger"> Login </a>
+            <a href="{% url 'account:register' %}" class="btn fw-bold btn-light btn-outline-danger"> Register </a>
 
           </div>
 
         </div>
 
         <hr class="text-danger mt-2">
-        <h6 class="fw-bold text-center">©2021 Juma Anton</h6>
+        <h6 class="fw-bold text-center">©2022 Juma Anton</h6>
       </div>
 
       <!-- Back To Top -->

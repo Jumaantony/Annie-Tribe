@@ -21,7 +21,7 @@
                 Recently Viewed Items
               </a>
 
-              <a class="list-group-item list-group-item-action fw-bold pt-2" data-bs-toggle="change_password.html"
+              <a class="list-group-item list-group-item-action fw-bold pt-2" data-bs-toggle="{% url 'account:password_change' %}"
                  href="{% url 'account:password_change' %}" role="tab">
                 <i class="fa fa-unlock fs-3" aria-hidden="true"> </i>
                 Change Password
