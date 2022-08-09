@@ -22,6 +22,9 @@ urlpatterns = [
                   path('admin/', admin.site.urls),
 
                   # orders urls
+                  path('payment/', include('payment.urls', namespace='payment')),
+
+                  # orders urls
                   path('orders/', include('orders.urls', namespace='orders')),
 
                   # coupon urls

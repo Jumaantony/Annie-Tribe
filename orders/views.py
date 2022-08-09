@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
+
 from .models import OrderItem, Order
 from .forms import OrderCreateForm, UserEditForm
 from cart.cart import Cart
@@ -11,6 +13,7 @@ def order_create(request):
         order_form = OrderCreateForm(request.POST)
         if order_form.is_valid():
             order = order_form.save()
+            print(request.user)
             for item in cart:
                 OrderItem.objects.create(
                     user=request.user,
@@ -19,10 +22,9 @@ def order_create(request):
                     price=item['price'],
                     quantity=item['quantity'])
 
-            # clear cart
-            cart.clear()
-            return render(request, 'created.html',
-                          {'order': order, })
+            # # clear cart
+            # cart.clear()
+            return redirect(reverse('payment:payment_options'))
     else:
         order_form = OrderCreateForm()
     return render(request, 'create.html', {'cart': cart,

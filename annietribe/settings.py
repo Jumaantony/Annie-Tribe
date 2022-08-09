@@ -69,6 +69,9 @@ INSTALLED_APPS = [
     # Orders app
     'orders.apps.OrdersConfig',
 
+    # Orders app
+    'payment.apps.PaymentConfig',
+
     # third party packages
     'crispy_forms',
     'phonenumber_field',
@@ -151,7 +154,7 @@ JAZZMIN_SETTINGS = {
     "topmenu_links": [
 
         # Url that gets reversed (Permissions can be added)
-        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
 
         # model admin to link to (Permissions checked against model)
         {"model": "auth.User"},
@@ -185,7 +188,6 @@ JAZZMIN_SETTINGS = {
 
     # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
     "order_with_respect_to": ["auth", "account", "products", "orders"],
-
 
     # Custom icons for side menu apps/models See https://fontawesome.com/icons?d=gallery&m=free&v=5.0.0,5.0.1,5.0.10,5.0.11,5.0.12,5.0.13,5.0.2,5.0.3,5.0.4,5.0.5,5.0.6,5.0.7,5.0.8,5.0.9,5.1.0,5.1.1,5.2.0,5.3.0,5.3.1,5.4.0,5.4.1,5.4.2,5.13.0,5.12.0,5.11.2,5.11.1,5.10.0,5.9.0,5.8.2,5.8.1,5.7.2,5.7.1,5.7.0,5.6.3,5.5.0,5.4.2
     # for the full list of 5.13.0 free icon classes
@@ -280,12 +282,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+
 # REdirect URLS
 LOGIN_REDIRECT_URL = 'account:dashboard'
 LOGIN_URL = 'account:login'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'products:index'
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

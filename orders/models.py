@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.contrib.auth.models import User
 from products.models import Product
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -38,8 +39,8 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                on_delete=models.CASCADE)
+    user = models.ForeignKey(User,
+                             on_delete=models.CASCADE)
     order = models.ForeignKey(Order,
                               related_name='items',
                               on_delete=models.CASCADE)
