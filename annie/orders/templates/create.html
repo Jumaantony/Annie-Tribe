@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Create Order
+{% endblock %}
+
+{% block content %}
+<style>
+label{
+  font-weight: bold;
+  }
+
+.help-block{
+color: red;
+}
+
+input{
+    width: 100%;
+    padding: 0.2rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+</style>
+    <!-- Pick Up and Delivery Address -->
+    <form method="post" action="" class="mt-3 delivery-address pt-3  pb-3 container mx-auto">
+      <h2 class="fw-bold">Delivery Address</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-6">
+          {{ order_form.first_name|as_crispy_field }}
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+          {{ order_form.last_name|as_crispy_field }}
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+          {{ order_form.email|as_crispy_field }}
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+          {{ order_form.phone_number|as_crispy_field }}
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+          {{ order_form.county|as_crispy_field }}
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+          {{ order_form.town|as_crispy_field }}
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+          {{ order_form.address|as_crispy_field }}
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+          {{ order_form.postal_code|as_crispy_field }}
+        </div>
+
+      </div>
+
+      <div class="d-flex">
+        <a href="{% url 'cart:cart_detail' %}" class="mt-2 btn btn-dark btn-outline-light fw-bold mx-auto">
+          <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+        Back to Cart
+      </a>
+
+
+      <button type="submit" class="mt-2 btn btn-dark btn-outline-danger fw-bold mx-auto flex-end">
+        Proceed To Payment
+        <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+      </button>
+      <!--
+        <input type="submit" name="delivery-address" value="Proceed To Payment" class="w-25 mt-2 btn btn-dark btn-outline-danger fw-bold mx-auto float-end">
+        -->
+      </div>
+      {% csrf_token %}
+    </form>
+
+{% endblock %}
