@@ -3,18 +3,17 @@ from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from orders.models import OrderItem, Order
+from cart.cart import Cart
 
 
 def payment_options(request):
     order_id = request.session.get('order_id')
-    order = get_object_or_404(Order, id=order_id)
-    total_cost = order.get_total_cost()
+    order = Order.objects.get(id=order_id)
+    ordered_items = OrderItem.objects.filter(order=order_id)
 
-    # order = Order.objects.all()
-    # ordered_items = OrderItem.objects.filter(user=request.user)
-
+    # request for cart
     print(ordered_items)
 
     return render(request, 'payment_options.html',
-                  {'ordered_items ': ordered_items,
-                   'order': order})
+                  {'order': order,
+                   'ordered_items': ordered_items})

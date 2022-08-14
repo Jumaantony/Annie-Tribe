@@ -12,8 +12,12 @@ def order_create(request):
     if request.method == 'POST':
         order_form = OrderCreateForm(request.POST)
         if order_form.is_valid():
-            order = order_form.save()
-            print(request.user)
+            order = order_form.save(commit=False)
+            if cart.coupon:
+                order.coupon = cart.coupon
+                order.discount = cart.coupon.discount
+            order.save()
+
             for item in cart:
                 OrderItem.objects.create(
                     user=request.user,
@@ -22,8 +26,12 @@ def order_create(request):
                     price=item['price'],
                     quantity=item['quantity'])
 
-            # # clear cart
-            # cart.clear()
+            # clear cart
+            cart.clear()
+
+            # set the order in the session
+            request.session['order_id'] = order.id
+
             return redirect(reverse('payment:payment_options'))
     else:
         order_form = OrderCreateForm()

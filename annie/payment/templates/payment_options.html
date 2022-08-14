@@ -49,6 +49,8 @@
 
           <div class="order_summary p-3">
             <h3 class="fw-bold">Order Summary</h3>
+
+
             {% for item in ordered_items %}
             <div class="products">
               <p class="d-inline">
@@ -61,12 +63,12 @@
             {% endfor %}
 
 
-            <h6 class="fw-bold text-end mt-4">Sub-Total: $250</h6>
+            <h6 class="fw-bold text-end mt-4">Sub-Total: {{ order.get_total_cost }}</h6>
 
-            <h6 class="fw-bold text-muted text-end">Coupon: <span class="text-danger">$10</span></h6>
+            <h6 class="fw-bold text-muted text-end">Coupon: <span class="text-danger">{{ order.discount }} %</span></h6>
 
             <hr class="text-danger">
-            <h5 class="fw-bold text-end">Total: $240</h5>
+            <h5 class="fw-bold text-end">Total: KES: {{ order.get_total_cost_after_discount }}</h5>
             <hr class="text-danger">
 
             <p class="text-center fw-bold fst-italic text-muted">Please not that delivery fees is not included!!</p>
