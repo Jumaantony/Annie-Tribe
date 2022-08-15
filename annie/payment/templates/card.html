@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Card Payment
+{% endblock %}
+
+{% block content %}
+
+<style>
+#card-number, #expiration-date, #cvv{
+        border: 1px solid black;
+        height: 32px;
+        padding: 1px;
+    }
+</style>
+
+    <!-- Visa and Master Card Payment -->
+
+    <div class="mt-2 pt-3 pb-3 container mx-auto">
+
+      <div class="row gx-4 gy-2 justify-content-center">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="order_summary p-2">
+            <h3 class="fw-bold">Order Summary</h3>
+
+            {% for item in ordered_items %}
+            <div class="products">
+              <p class="d-inline">
+                <span class="fw-bold"> 1X </span>
+               {{ item.product.name }}
+              </p>
+
+              <span class="float-end d-inline fw-bold">KES: {{ item.product.price }}</span>
+            </div>
+            {% endfor %}
+
+
+            <h6 class="fw-bold text-end mt-4">Sub-Total: {{ order.get_total_cost }}</h6>
+
+           {% if order.coupon %}
+               <h6 class="fw-bold text-muted text-end">Coupon: <span class="text-danger">{{ order.discount }}% discount</span></h6>
+            {% endif %}
+            <hr class="text-danger">
+            <h5 class="fw-bold text-end">Total: KES: {{ order.get_total_cost_after_discount }}</h5>
+            <hr class="text-danger">
+
+            <p class="text-center fw-bold fst-italic text-muted">Please not that delivery fees is not included!!</p>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6 text-center">
+
+          <div class="order_summary p-2">
+            <h3 class="fw-bold">Visa or Master Card</h3>
+
+            <div class="card border-0">
+              <img src="{% static 'images/card.png' %}" class="card-img-top w-25 mx-auto" alt="card image">
+              <div class="card-body">
+
+                <form id="payment" method="post">
+
+                  <label for="card-number" class="fw-bold">Card Number</label>
+                        <div id="card-number" class="field rounded"></div>
+
+                        <label for="cvv" class="fw-bold">CVV</label>
+                        <div id="cvv" class="field rounded"></div>
+
+                        <label for="expiration-date" class="fw-bold">Expiration Date</label>
+                        <div id="expiration-date" class="field rounded"></div>
+
+                        <input type="hidden" id="nonce" name="payment_method_nonce" value="">
+                        {% csrf_token %}
+                  <input type="submit" value="PAY NOW: KES: {{ total_cost_after_discount }}" class="btn btn-dark btn-outline-light fw-bold mt-2">
+                </form>
+
+              </div>
+            </div>
+
+
+
+          </div>
+
+
+        </div>
+      </div>
+
+
+      <div class="d-flex">
+        <a href="{% url 'payment:payment_options' %}" class="mt-2 btn btn-dark btn-outline-light fw-bold mx-auto">
+          <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+          Payment Options
+        </a>
+
+
+       <!-- <a href="order.html" class="mt-2 btn btn-dark btn-outline-danger fw-bold mx-auto flex-end">
+          Proceed
+          <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+        </a> -->
+
+      </div>
+
+    </div>
+
+    <!-- includes the Braintree JS client SDK -->
+    <script src="https://js.braintreegateway.com/web/3.58.0/js/client.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/3.58.0/js/hosted-fields.min.js"></script>
+    <script>
+      var form = document.querySelector('#payment');
+      var submit = document.querySelector('input[type="submit"]');
+
+      braintree.client.create({
+        authorization: '{{ client_token }}'
+      }, function (clientErr, clientInstance) {
+        if (clientErr) {
+          console.error(clientErr);
+          return;
+        }
+
+        braintree.hostedFields.create({
+          client: clientInstance,
+          styles: {
+            'input': {'font-size': '13px'},
+            'input.invalid': {'color': 'red'},
+            'input.valid': {'color': 'green'}
+          },
+          fields: {
+            number: {selector: '#card-number'},
+            cvv: {selector: '#cvv'},
+            expirationDate: {selector: '#expiration-date'}
+          }
+        }, function (hostedFieldsErr, hostedFieldsInstance) {
+          if (hostedFieldsErr) {
+            console.error(hostedFieldsErr);
+            return;
+          }
+
+          submit.removeAttribute('disabled');
+
+          form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
+              if (tokenizeErr) {
+                console.error(tokenizeErr);
+                return;
+              }
+              // set nonce to send to the server
+              document.getElementById('nonce').value = payload.nonce;
+              // submit form
+              document.getElementById('payment').submit();
+            });
+          }, false);
+        });
+      });
+    </script>
+
+{% endblock %}

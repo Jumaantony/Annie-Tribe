@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
+import braintree
+
 # cloudinary imports
 import cloudinary
 import cloudinary.uploader
@@ -308,6 +310,20 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static/'
+
+# Braintree settings
+BRAINTREE_MERCHANT_ID = 'vk22nv886356wwgh'
+BRAINTREE_PUBLIC_KEY = 'nvbb53rjxpcjgh4k'
+BRAINTREE_PRIVATE_KEY = '3dd66d0db0a73a52dae51ea7602f131f'
+# Merchant ID
+# Public Key
+# Private key
+BRAINTREE_CONF = braintree.Configuration(
+    braintree.Environment.Sandbox,
+    BRAINTREE_MERCHANT_ID,
+    BRAINTREE_PUBLIC_KEY,
+    BRAINTREE_PRIVATE_KEY
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
