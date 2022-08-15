@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 import braintree
 from orders.models import OrderItem, Order
@@ -8,6 +9,7 @@ from django.conf import settings
 gateway = braintree.BraintreeGateway(settings.BRAINTREE_CONF)
 
 
+@login_required
 def payment_options(request):
     order_id = request.session.get('order_id')
     order = Order.objects.get(id=order_id)
@@ -18,6 +20,7 @@ def payment_options(request):
                    'ordered_items': ordered_items})
 
 
+@login_required
 def card_payment(request):
     order_id = request.session.get('order_id')
     order = Order.objects.get(id=order_id)
@@ -56,9 +59,11 @@ def card_payment(request):
                    'client_token': client_token})
 
 
+@login_required
 def payment_done(request):
     return render(request, 'payment_done.html')
 
 
+@login_required
 def payment_canceled(request):
     return render(request, 'payment_canceled.html')

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
@@ -7,6 +8,7 @@ from cart.cart import Cart
 
 
 # Create your views here.
+@login_required
 def order_create(request):
     cart = Cart(request)
     if request.method == 'POST':
@@ -39,6 +41,7 @@ def order_create(request):
                                            'order_form': order_form, })
 
 
+@login_required
 def order_list(request):
     orders = Order.objects.all()
     ordered_items = OrderItem.objects.filter(user=request.user)
