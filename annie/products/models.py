@@ -57,3 +57,20 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('products:product_detail',
                        args=[self.id, self.slug])
+
+
+class Review(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('created',)
+
+    def __str__(self):
+        return f'Review on {self.product}'
+
+    # return f'Comment by {self.user} on {self.product}'

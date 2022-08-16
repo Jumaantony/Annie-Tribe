@@ -10,6 +10,27 @@
 
 {% block content %}
 
+    <style>
+      label{
+          font-weight: bold;
+          color: black;
+          }
+
+        .help-block, .errorField{
+           color: #dc3545;
+           font-weight: bold;
+        }
+
+        .asteriskField {
+        display: none;
+        }
+
+        .textarea{
+          border-radius: 3px;
+        }
+
+    </style>
+
     <div class="row mt-2 product-cont m-1 pt-3 pb-3">
       <div class="col-lg-5 col-md-5 col-sm-10 justify-content-center">
 
@@ -78,19 +99,19 @@
         <p class="bg-dark text-light w-75 text-center py-1 fw-bold rounded"> Countrywide Delivery</p>
 
         <h6><span class="fw-bold text-danger pt-2">Category:</span>
-          <a href="{{ product.category.get_absolute_url }}" class="text-decoration-none">{{ product.category }}</a>
+          <a href="{{ product.category.get_absolute_url }}" class="text-decoration-none text-dark fw-bold"> {{ product.category }}</a>
         </h6>
 
         <!-- Product rating Total -->
-        <div class="product-rating text-danger d-inline pt-2">
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star text-dark" aria-hidden="true"></i>
-        </div>
+<!--        <div class="product-rating text-danger d-inline pt-2">-->
+<!--          <i class="fa fa-star" aria-hidden="true"></i>-->
+<!--          <i class="fa fa-star" aria-hidden="true"></i>-->
+<!--          <i class="fa fa-star" aria-hidden="true"></i>-->
+<!--          <i class="fa fa-star" aria-hidden="true"></i>-->
+<!--          <i class="fa fa-star text-dark" aria-hidden="true"></i>-->
+<!--        </div>-->
 
-        <h7 class="d-inline pt-2"> (100 ratings) </h7>
+<!--        <h7 class="d-inline pt-2"> (100 ratings) </h7>-->
 
         <h4 class="fw-bold pt-2">
           <span class="text-danger">Ksh:</span>
@@ -106,6 +127,7 @@
         {% else %}
            <input class="btn btn-md btn-dark btn-outline-danger fw-bold mt-2 w-75" type="submit" value="Out of Stock">
         {% endif %}
+
         <h6 class="pt-3 fw-bold">Share This Product ;</h6>
 
         <a href="" target="_blank" rel="noopener noreferrer" class="btn btn-dark btn-outline-danger text-decoration-none fw-bolder share-btn text-center share-product">
@@ -146,114 +168,81 @@
             Product Reviews
           </h3>
 
-          <h6 class="d-inline text-end"><a href="" class=" text-decoration-underline text-danger">See All</a></h6>
+<!--          <h6 class="d-inline text-end"><a href="" class=" text-decoration-underline text-danger">See All</a></h6>-->
 
-          <!-- Product Review Single  -->
-          <div class="review-cont bg-dark p-2 mb-2 rounded w-75">
+          {% for review in reviews %}
+            <!-- Product Review Single  -->
+            <div class="review-cont bg-dark p-2 mb-2 rounded w-75">
 
-            <!-- Product rating single -->
-            <div class="product-rating text-danger d-inline pt-2">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-             </div>
+              <h6 class="text-danger fw-bold">
+                {{ review.body }}
+              </h6>
 
-            <h6 class="text-danger fw-bold">
-              I love Shopping at Annie Tribe. It offers the best Trending Fashion.
-            </h6>
+              <p class="text-light">{{ review.created }}  <span class="fw-bold">By {{ review.user }}</span> </p>
 
-            <p class="text-light">23rd Oct 2021  <span class="fw-bold">By Mitchie Kemma</span> </p>
+            </div>
+          {% empty %}
+            <h5 class="fw-bold text-center"> There are no reviews yet. </h5>
+          {% endfor %}
 
-          </div>
-
-          <div class="review-cont bg-dark p-2 mb-2 rounded w-75">
-
-            <!-- Product rating single -->
-            <div class="product-rating text-danger d-inline pt-2">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-             </div>
-
-            <h6 class="text-danger fw-bold">
-              I love Shopping at Annie Tribe. It offers the best Trending Fashion.
-            </h6>
-
-            <p class="text-light">23rd Oct 2021  <span class="fw-bold">By Mitchie Kemma</span> </p>
-
-          </div>
-
-          <div class="review-cont bg-dark p-2 mb-2 rounded w-75">
-
-            <!-- Product rating single -->
-            <div class="product-rating text-danger d-inline pt-2">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-              <i class="fa fa-star" aria-hidden="true"></i>
-             </div>
-
-            <h6 class="text-danger fw-bold">
-              I love Shopping at Annie Tribe. It offers the best Trending Fashion.
-            </h6>
-
-            <p class="text-light">23rd Oct 2021  <span class="fw-bold">By Mitchie Kemma</span> </p>
-
-          </div>
-
-          <h6 class="text-decoration-underline fw-bold">Leave a Review  </h6>
-
-          <div class="product-rating text-danger d-inline pt-2">
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <h7 class="text-dark fw-bold">5</h7>
-          </div><br>
-
-          <div class="product-rating text-danger d-inline pt-2">
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <h7 class="text-dark fw-bold">4</h7>
-          </div><br>
-
-          <div class="product-rating text-danger d-inline pt-2">
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <h7 class="text-dark fw-bold">3</h7>
-          </div><br>
-
-          <div class="product-rating text-danger d-inline pt-2">
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <h7 class="text-dark fw-bold">2</h7>
-          </div><br>
-
-          <div class="product-rating text-danger d-inline pt-2">
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <h7 class="text-dark fw-bold">1</h7>
-          </div><br>
-
-          <form method="Get|Post" class="comment-form mt-3 p-1 w-75">
+          {% if new_review %}
+            <div class="alert alert-success" role="alert">
+              Your Review has been submitted successfully and is awaiting moderation.
+            </div>
+          {% else %}
 
 
-            <input type="text" class="form-control mb-2" id="Name" placeholder="Your Name" required="">
+            <h6 class="text-decoration-underline fw-bold">Leave a Review  </h6>
 
-            <input type="email" class="form-control mb-2" id="Email" aria-describedby="emailHelp" placeholder="Your Email" required="">
+  <!--          <div class="product-rating text-danger d-inline pt-2">-->
+  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
+  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
+  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
+  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
+  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
+  <!--            <h7 class="text-dark fw-bold">5</h7>-->
+  <!--          </div><br>-->
 
-            <textarea name="comment" placeholder=" Your Review" class="form-control mb-2" id="Comment" required=""></textarea>
+  <!--          <div class="product-rating text-danger d-inline pt-2">-->
+  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
+  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
+  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
+  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
+  <!--            <h7 class="text-dark fw-bold">4</h7>-->
+  <!--          </div><br>-->
 
-            <input type="submit" class="btn btn-dark btn-outline-danger fw-bolder" name="Review">
-          </form>
+  <!--          <div class="product-rating text-danger d-inline pt-2">-->
+  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
+  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
+  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
+  <!--            <h7 class="text-dark fw-bold">3</h7>-->
+  <!--          </div><br>-->
+
+  <!--          <div class="product-rating text-danger d-inline pt-2">-->
+  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
+  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
+  <!--            <h7 class="text-dark fw-bold">2</h7>-->
+  <!--          </div><br>-->
+
+  <!--          <div class="product-rating text-danger d-inline pt-2">-->
+  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
+  <!--            <h7 class="text-dark fw-bold">1</h7>-->
+  <!--          </div><br>-->
+
+            <form method="POST" class="comment-form mt-3 p-1 w-75">
+              {% csrf_token %}
+
+  <!--            <input type="text" class="form-control mb-2" id="Name" placeholder="Your Name" required="">-->
+
+  <!--            <input type="email" class="form-control mb-2" id="Email" aria-describedby="emailHelp" placeholder="Your Email" required="">-->
+
+  <!--            <textarea name="comment" placeholder=" Your Review" class="form-control mb-2" id="Comment" required=""></textarea>-->
+              {{ review_form.body|as_crispy_field }} <br>
+              <input type="submit" class="btn btn-dark btn-outline-danger fw-bolder" name="Review">
+
+            </form>
+
+          {% endif %}
         </div>
       </div>
 

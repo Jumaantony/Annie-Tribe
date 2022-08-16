@@ -1,7 +1,12 @@
+from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render, get_object_or_404
+
+from .forms import ReviewForm
 from .models import Category, Product, Banner
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from cart.forms import CartAddProductForm
+from orders.views import order_create
+from orders.models import Order
 
 
 # Create your views here.
@@ -45,10 +50,28 @@ def product_list(request, category_slug=None):
 def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id,
                                 slug=slug)
-
     # cart form
     cart_product_form = CartAddProductForm()
 
+    if user_passes_test(order_create):
+        reviews = product.reviews.filter(active=True)
+        new_review = None
+
+        if request.method == 'POST':
+            review_form = ReviewForm(data=request.POST)
+
+            if review_form.is_valid():
+                new_review = review_form.save(commit=False)
+                # assign review to the product
+                new_review.product = product
+
+                new_review.save()
+        else:
+            review_form = ReviewForm()
+
     return render(request, 'product_detail.html',
                   {'product': product,
-                   'cart_product_form': cart_product_form, })
+                   'cart_product_form': cart_product_form,
+                   'reviews': reviews,
+                   'new_review': new_review,
+                   'review_form': review_form})
