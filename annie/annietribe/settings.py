@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'phonenumber_field',
     'jazzmin',
+    'django_social_share',
 
     # ck editor
     'ckeditor',
@@ -283,8 +284,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
 
 # REdirect URLS
 LOGIN_REDIRECT_URL = 'account:dashboard'
