@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -18,6 +20,12 @@ def order_create(request):
             if cart.coupon:
                 order.coupon = cart.coupon
                 order.discount = cart.coupon.discount
+
+            order.sub_total = Decimal(cart.get_total_price())
+            order.total = Decimal(cart.get_total_price_after_discount())
+
+            print(order.sub_total)
+            print(order.total)
             order.save()
 
             for item in cart:

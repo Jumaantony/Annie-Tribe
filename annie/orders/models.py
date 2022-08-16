@@ -37,6 +37,8 @@ class Order(models.Model):
                                null=True,
                                blank=True,
                                on_delete=models.SET_NULL)
+    sub_total = models.DecimalField(decimal_places=2, max_digits=10, default=0)
+    total = models.DecimalField(decimal_places=2, max_digits=10, default=0)
     discount = models.IntegerField(default=0,
                                    validators=[MinValueValidator(0),
                                                MaxValueValidator(100)])
