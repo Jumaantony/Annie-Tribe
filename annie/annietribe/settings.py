@@ -285,6 +285,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Custom Django auth settings
+AUTHENTICATION_BACKENDS = \
+    ('django.contrib.auth.backends.AllowAllUsersModelBackend',
+     # email authentication
+     'account.authentication.EmailAuthBackend',
+     )
+
+AUTH_USER_MODEL = 'account.User'
+
 # REdirect URLS
 LOGIN_REDIRECT_URL = 'account:dashboard'
 LOGIN_URL = 'account:login'
@@ -310,6 +319,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static/'
 
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 # Braintree settings
 BRAINTREE_MERCHANT_ID = 'vk22nv886356wwgh'
 BRAINTREE_PUBLIC_KEY = 'nvbb53rjxpcjgh4k'
@@ -324,7 +339,17 @@ BRAINTREE_CONF = braintree.Configuration(
     BRAINTREE_PRIVATE_KEY
 )
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+# sending emails
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'jumaanton98@gmail.com'
+EMAIL_HOST_PASSWORD = 'ominrpedqaebtvfj'
+EMAIL_USE_TLS = True
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# twilio config
+
+TWILIO_VERIFY_SERVICE_SID = 'VAb9acbf37bd25e5f9a8b6911162a8536f'
+TWILIO_ACCOUNT_SID = 'AC932742e59389ffc506cc4bb38de2e6a9'
+TWILIO_AUTH_TOKEN = 'b32936fb6169d9c4d086435874061577'
+

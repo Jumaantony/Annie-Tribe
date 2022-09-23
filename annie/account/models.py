@@ -1,19 +1,14 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.conf import settings
+
+
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 # Create your models here.
-class Profile(models.Model):
-    CHOICES = (
-        ('Male', 'Male'),
-        ('Female', 'Female'),
-    )
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                on_delete=models.CASCADE)
-    date_of_birth = models.DateTimeField(blank=True, null=True)
-    gender = models.CharField(blank=True,
-                              max_length=20,
-                              choices=CHOICES)
+class User(AbstractUser):
+    phone = models.TextField(max_length=20, blank=False)
+    is_verified = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'Profile for user {self.user.username}'
+        return f'Profile for user {self.username}'

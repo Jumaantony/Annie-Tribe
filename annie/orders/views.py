@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from .models import OrderItem, Order
-from .forms import OrderCreateForm, UserEditForm
+from .forms import OrderCreateForm
 from cart.cart import Cart
 
 
