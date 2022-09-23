@@ -1,14 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import PasswordResetView
 from django.contrib.auth import views as auth_views
-from django.contrib.messages.views import SuccessMessageMixin
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 
 from .forms import UserRegistrationForm, UserEditForm, VerifyForm
-from .models import User
 from . import verify
 
 

@@ -1,12 +1,11 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from .forms import ReviewForm
 from .models import Category, Product, Banner
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from cart.forms import CartAddProductForm
 from orders.views import order_create
-from orders.models import Order
 
 
 # Create your views here.

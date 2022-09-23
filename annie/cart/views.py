@@ -1,12 +1,15 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
+
 from products.models import Product
 from .cart import Cart
 from .forms import CartAddProductForm
 from coupons.forms import CouponApplyForm
+from account.decorators import verification_required
 
 
+@verification_required
 @login_required
 @require_POST
 def cart_add(request, product_id):
@@ -25,6 +28,7 @@ def cart_add(request, product_id):
     return redirect('cart:cart_detail')
 
 
+@verification_required
 @login_required
 @require_POST
 def cart_remove(request, product_id):
