@@ -7,16 +7,21 @@ from django.urls import reverse
 from .models import OrderItem, Order
 from .forms import OrderCreateForm
 from cart.cart import Cart
-
+from account.models import User
 
 # Create your views here.
+
+
 @login_required
 def order_create(request):
     cart = Cart(request)
     if request.method == 'POST':
         order_form = OrderCreateForm(request.POST)
+
         if order_form.is_valid():
             order = order_form.save(commit=False)
+            user = request.user
+
             if cart.coupon:
                 order.coupon = cart.coupon
                 order.discount = cart.coupon.discount
@@ -24,13 +29,15 @@ def order_create(request):
             order.sub_total = Decimal(cart.get_total_price())
             order.total = Decimal(cart.get_total_price_after_discount())
 
-            print(order.sub_total)
-            print(order.total)
+            order.first_name = user.first_name
+            order.last_name = user.last_name
+            order.email = user.email
+            order.phone_number = user.phone
+
             order.save()
 
             for item in cart:
                 OrderItem.objects.create(
-                    user=request.user,
                     order=order,
                     product=item['product'],
                     price=item['price'],
