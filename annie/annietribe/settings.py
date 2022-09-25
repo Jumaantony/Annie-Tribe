@@ -39,7 +39,7 @@ SECRET_KEY = 'django-insecure-l7i$059ak+ibx&z=2hyx0-m0i*r4=dpxkw2x=l$x#@6ix6ct20
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0bd7-154-159-237-225.in.ngrok.io', '127.0.0.1']
 
 # messages
 MESSAGE_TAGS = {
