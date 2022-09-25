@@ -60,6 +60,9 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
+    user = models.ForeignKey(User,
+                             on_delete=models.CASCADE,
+                             null=True, blank=True)
     order = models.ForeignKey(Order,
                               related_name='items',
                               on_delete=models.CASCADE)

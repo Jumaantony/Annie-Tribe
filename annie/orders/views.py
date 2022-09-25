@@ -59,7 +59,7 @@ def order_create(request):
 @login_required
 def order_list(request):
     orders = Order.objects.all()
-    ordered_items = OrderItem.objects.filter(user=request.user)
+    ordered_items = OrderItem.objects.filter(user=request.user.pk)
     return render(request, 'orders.html',
                   {'orders': orders,
                    'ordered_items': ordered_items})
