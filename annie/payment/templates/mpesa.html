@@ -8,6 +8,12 @@
 
 {% block content %}
 
+<style>
+    #div_id_phone{
+        color: red;
+    {
+</style>
+
     <!-- Payment Options -->
 
     <div class="mt-2 pt-3 pb-3 container mx-auto">
@@ -25,7 +31,7 @@
                 <form method="post">
                     <p class="fw-bold">Enter a valid Safaricom Number:</p>
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    {{ form.phone|as_crispy_field }}
 <!--                    <input type="number" name="phone number" placeholder="Eg. 0742491942" class="p-1 mb-2">-->
 
                     <button type="submit" class="btn btn-dark fw-bold">
