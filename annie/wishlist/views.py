@@ -9,7 +9,7 @@ from account.models import User
 
 @login_required
 def wishlist(request):
-    user = User.objects.get(request.id)
+    user = request.user
     products = Product.objects.filter(users_wishlist=request.user)
     return render(request, 'wishlist_detail.html',
                   {"wishlist": products,
