@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from .models import Category, Product, Banner
-from ..cart.forms import CartAddProductForm
+from cart.forms import CartAddProductForm
 
 
 # Create your views here.
