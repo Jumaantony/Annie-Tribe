@@ -186,79 +186,79 @@
 
 <!--          <h6 class="d-inline text-end"><a href="" class=" text-decoration-underline text-danger">See All</a></h6>-->
 
-          {% for review in reviews %}
-            <!-- Product Review Single  -->
-            <div class="review-cont bg-dark p-2 mb-2 rounded w-75">
+<!--          {% for review in reviews %}-->
+<!--            &lt;!&ndash; Product Review Single  &ndash;&gt;-->
+<!--            <div class="review-cont bg-dark p-2 mb-2 rounded w-75">-->
 
-              <h6 class="text-danger fw-bold">
-                {{ review.body }}
-              </h6>
+<!--              <h6 class="text-danger fw-bold">-->
+<!--                {{ review.body }}-->
+<!--              </h6>-->
 
-              <p class="text-light">{{ review.created }}  <span class="fw-bold">By {{ review.user }}</span> </p>
+<!--              <p class="text-light">{{ review.created }}  <span class="fw-bold">By {{ review.user }}</span> </p>-->
 
-            </div>
-          {% empty %}
-            <h5 class="fw-bold text-center"> There are no reviews yet. </h5>
-          {% endfor %}
+<!--            </div>-->
+<!--          {% empty %}-->
+<!--            <h5 class="fw-bold text-center"> There are no reviews yet. </h5>-->
+<!--          {% endfor %}-->
 
-          {% if new_review %}
-            <div class="alert alert-success" role="alert">
-              Your Review has been submitted successfully and is awaiting moderation.
-            </div>
-          {% else %}
+<!--          {% if new_review %}-->
+<!--            <div class="alert alert-success" role="alert">-->
+<!--              Your Review has been submitted successfully and is awaiting moderation.-->
+<!--            </div>-->
+<!--          {% else %}-->
 
 
-            <h6 class="text-decoration-underline fw-bold">Leave a Review  </h6>
+<!--            <h6 class="text-decoration-underline fw-bold">Leave a Review  </h6>-->
 
-  <!--          <div class="product-rating text-danger d-inline pt-2">-->
-  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
-  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
-  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
-  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
-  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
-  <!--            <h7 class="text-dark fw-bold">5</h7>-->
-  <!--          </div><br>-->
+<!--  &lt;!&ndash;          <div class="product-rating text-danger d-inline pt-2">&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-star" aria-hidden="true"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-star" aria-hidden="true"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-star" aria-hidden="true"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-star" aria-hidden="true"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-star" aria-hidden="true"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <h7 class="text-dark fw-bold">5</h7>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </div><br>&ndash;&gt;-->
 
-  <!--          <div class="product-rating text-danger d-inline pt-2">-->
-  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
-  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
-  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
-  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
-  <!--            <h7 class="text-dark fw-bold">4</h7>-->
-  <!--          </div><br>-->
+<!--  &lt;!&ndash;          <div class="product-rating text-danger d-inline pt-2">&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-star" aria-hidden="true"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-star" aria-hidden="true"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-star" aria-hidden="true"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-star" aria-hidden="true"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <h7 class="text-dark fw-bold">4</h7>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </div><br>&ndash;&gt;-->
 
-  <!--          <div class="product-rating text-danger d-inline pt-2">-->
-  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
-  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
-  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
-  <!--            <h7 class="text-dark fw-bold">3</h7>-->
-  <!--          </div><br>-->
+<!--  &lt;!&ndash;          <div class="product-rating text-danger d-inline pt-2">&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-star" aria-hidden="true"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-star" aria-hidden="true"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-star" aria-hidden="true"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <h7 class="text-dark fw-bold">3</h7>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </div><br>&ndash;&gt;-->
 
-  <!--          <div class="product-rating text-danger d-inline pt-2">-->
-  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
-  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
-  <!--            <h7 class="text-dark fw-bold">2</h7>-->
-  <!--          </div><br>-->
+<!--  &lt;!&ndash;          <div class="product-rating text-danger d-inline pt-2">&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-star" aria-hidden="true"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-star" aria-hidden="true"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <h7 class="text-dark fw-bold">2</h7>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </div><br>&ndash;&gt;-->
 
-  <!--          <div class="product-rating text-danger d-inline pt-2">-->
-  <!--            <i class="fa fa-star" aria-hidden="true"></i>-->
-  <!--            <h7 class="text-dark fw-bold">1</h7>-->
-  <!--          </div><br>-->
+<!--  &lt;!&ndash;          <div class="product-rating text-danger d-inline pt-2">&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-star" aria-hidden="true"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <h7 class="text-dark fw-bold">1</h7>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </div><br>&ndash;&gt;-->
 
-            <form method="POST" class="comment-form mt-3 p-1 w-75">
-              {% csrf_token %}
+<!--            <form method="POST" class="comment-form mt-3 p-1 w-75">-->
+<!--              {% csrf_token %}-->
 
-  <!--            <input type="text" class="form-control mb-2" id="Name" placeholder="Your Name" required="">-->
+<!--  &lt;!&ndash;            <input type="text" class="form-control mb-2" id="Name" placeholder="Your Name" required="">&ndash;&gt;-->
 
-  <!--            <input type="email" class="form-control mb-2" id="Email" aria-describedby="emailHelp" placeholder="Your Email" required="">-->
+<!--  &lt;!&ndash;            <input type="email" class="form-control mb-2" id="Email" aria-describedby="emailHelp" placeholder="Your Email" required="">&ndash;&gt;-->
 
-  <!--            <textarea name="comment" placeholder=" Your Review" class="form-control mb-2" id="Comment" required=""></textarea>-->
-              {{ review_form.body|as_crispy_field }} <br>
-              <input type="submit" class="btn btn-dark btn-outline-danger fw-bolder" name="Review">
+<!--  &lt;!&ndash;            <textarea name="comment" placeholder=" Your Review" class="form-control mb-2" id="Comment" required=""></textarea>&ndash;&gt;-->
+<!--               <br>-->
+<!--              <input type="submit" class="btn btn-dark btn-outline-danger fw-bolder" name="Review">-->
 
-            </form>
+<!--            </form>-->
 
-          {% endif %}
+<!--          {% endif %}-->
         </div>
       </div>
 

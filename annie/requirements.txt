@@ -10,14 +10,17 @@ django-ckeditor==6.2.0
 django-crispy-forms==1.13.0
 django-jazzmin==2.4.9
 django-js-asset==1.2.2
+django-mailchimp==0.1.30
 django-phonenumber-field==6.0.0
 django-social-share==2.3.0
 idna==3.3
+mailchimp-marketing==3.0.75
 phonenumbers==8.12.41
 Pillow==8.4.0
 pkg_resources==0.0.0
 pycparser==2.21
 PyJWT==2.5.0
+python-dateutil==2.8.2
 python-decouple==3.6
 python-dotenv==0.21.0
 pytz==2021.1
