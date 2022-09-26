@@ -1,4 +1,3 @@
-import os
 from django.conf import settings
 from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException

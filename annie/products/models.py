@@ -1,9 +1,10 @@
-from django.conf import settings
 from django.db import models
-from cloudinary.models import CloudinaryField
 from django.urls import reverse
-from ckeditor_uploader.fields import RichTextUploadingField
+
 from account.models import User
+
+from cloudinary.models import CloudinaryField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 # Create your models here.

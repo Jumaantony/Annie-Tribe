@@ -2,13 +2,11 @@ import json
 import requests
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 
 from orders.models import OrderItem, Order
-
 from .forms import MpesaPhoneForm
 from .models import MpesaPayment
 

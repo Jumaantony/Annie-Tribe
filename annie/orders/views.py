@@ -1,5 +1,4 @@
 from decimal import Decimal
-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -7,7 +6,6 @@ from django.urls import reverse
 from .models import OrderItem, Order
 from .forms import OrderCreateForm
 from cart.cart import Cart
-from account.models import User
 
 # Create your views here.
 

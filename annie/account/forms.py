@@ -1,7 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 
-from phonenumber_field.formfields import PhoneNumberField
 
 from .models import User
 

@@ -4,7 +4,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
 from products.models import Product
-from account.models import User
 
 
 @login_required
