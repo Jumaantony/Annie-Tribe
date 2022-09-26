@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
@@ -70,3 +72,25 @@ def product_detail(request, id, slug):
                   {'product': product,
                    'cart_product_form': cart_product_form,})
 
+
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        form_data = {
+            'name': name,
+            'email': email,
+            'message': message,
+        }
+        message = '''
+                From:\n\t\t{}\n
+                Message:\n\t\t{}\n
+                Email:\n\t\t{}\n
+                '''.format(form_data['name'], form_data['message'], form_data['email'], )
+        send_mail('You got a mail!', message, '', ['jumaanton98@gmail.com'])
+        messages.success(request, 'Your email has been sent successfully. We will reach out to you as soon as possible')
+        return render(request, 'contact.html')
+
+    else:
+        return render(request, 'contact.html', {})

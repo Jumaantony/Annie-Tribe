@@ -7,6 +7,8 @@ urlpatterns = [
     # index page
     path('', views.index, name='index'),
 
+    path('contact/', views.contact, name='contact'),
+
     # list of all products
     path('products/', views.product_list, name='product_list'),
 
@@ -15,4 +17,5 @@ urlpatterns = [
 
     # product detail
     path('<int:id>/<slug:slug>/', views.product_detail, name='product_detail'),
+
 ]
