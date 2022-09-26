@@ -292,8 +292,9 @@
           <h4 class="fw-bold">Subscribe to Our Mailing List</h4>
 
 
-          <form class="d-flex">
-            <input class="form-control me-2" type="email" placeholder="Enter your Email" aria-label="EMAIL">
+          <form class="d-flex" method="post" action="{% url 'products:subscribe' %}">
+            {% csrf_token %}
+            <input class="form-control me-2" name="subscriber_email" type="email" placeholder="Enter your Email" aria-label="EMAIL">
 
             <button class="btn fw-bold btn-light btn-outline-danger" type="submit">Subscribe</button>
 

@@ -319,7 +319,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static/'
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -339,13 +338,10 @@ BRAINTREE_CONF = braintree.Configuration(
     BRAINTREE_PRIVATE_KEY
 )
 
-# sending emails
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'jumaanton98@gmail.com'
-EMAIL_HOST_PASSWORD = 'ominrpedqaebtvfj'
-EMAIL_USE_TLS = True
+# mailchimp config
+MAILCHIMP_API_KEY = '9c538e43bd29f6ec6b97fc4817046f9b-us8'
+MAILCHIMP_REGION = 'us8'
+MAILCHIMP_MARKETING_AUDIENCE_ID = '7dc853a438'
 
 # twilio config
 
@@ -353,7 +349,6 @@ TWILIO_VERIFY_SERVICE_SID = 'VAb9acbf37bd25e5f9a8b6911162a8536f'
 TWILIO_ACCOUNT_SID = 'AC932742e59389ffc506cc4bb38de2e6a9'
 TWILIO_AUTH_TOKEN = 'b32936fb6169d9c4d086435874061577'
 
-
 # sending emails
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -361,4 +356,3 @@ EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'jumaanton98@gmail.com'
 EMAIL_HOST_PASSWORD = 'ominrpedqaebtvfj'
 EMAIL_USE_TLS = True
-
