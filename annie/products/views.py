@@ -3,6 +3,7 @@ import logging
 
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.postgres.search import SearchVector
 from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
@@ -199,3 +200,12 @@ def contact(request):
 
     else:
         return render(request, 'contact.html', {})
+
+
+def search(request):
+    if request.method == 'GET':
+        query = request.GET['search_query']
+        search_results = Product.objects.filter(available=True). annotate(
+            search=SearchVector('name', 'description'), ).filter(search=query)
+        return render(request, 'search.html', {'query': query,
+                                               'search_results': search_results, })

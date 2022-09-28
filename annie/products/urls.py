@@ -25,6 +25,8 @@ urlpatterns = [
     # list of all products
     path('products/', views.product_list, name='product_list'),
 
+    path('search/', views.search, name='search'),
+
     # list of products in a given category
     path('<slug:category_slug>/', views.product_list, name='product_list_by_category'),
 

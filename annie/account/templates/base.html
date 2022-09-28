@@ -164,7 +164,7 @@
 
           </div>
 
-          <!-- Search, Account and Cart.. hidden on x-small-->
+          <!-- Search, Account and Cart hidden on x-small-->
 
           <div class="d-flex">
             <div class="dropdown p-1  d-none d-sm-block">
@@ -225,8 +225,8 @@
       <!-- Search Form Toggled -->
       <div class="container-sm collapse mt-2" id="collapseExample">
 
-        <form class="d-flex" action="" method="">
-            <input class="form-control me-2" type="search" placeholder="Search for Products, Categories" aria-label="Search">
+        <form class="d-flex" action="{% url 'products:search' %}" method="get">
+            <input class="form-control me-2" type="search" name="search_query" placeholder="Search for Products, Categories" aria-label="Search">
 
             <input type="submit" name="Search" class="btn fw-bold btn-light btn-outline-dark">
 
