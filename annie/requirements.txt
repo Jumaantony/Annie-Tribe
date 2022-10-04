@@ -3,12 +3,9 @@ braintree==4.16.0
 certifi==2021.10.8
 cffi==1.15.1
 charset-normalizer==2.1.0
-cloudinary==1.26.0
 cryptography==38.0.1
 datetime-truncate==1.1.1
 Django==3.2.7
-django-admin-charts==1.2.0
-django-bower==5.2.0
 django-ckeditor==6.2.0
 django-crispy-forms==1.13.0
 django-jazzmin==2.4.9

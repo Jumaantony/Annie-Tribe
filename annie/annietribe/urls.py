@@ -19,8 +19,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-                  path('admin_tools_stats/', include('admin_tools_stats.urls')),
-
                   path('admin/', admin.site.urls),
 
                   # orders urls
