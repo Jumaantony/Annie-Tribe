@@ -360,3 +360,9 @@ EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'jumaanton98@gmail.com'
 EMAIL_HOST_PASSWORD = 'ominrpedqaebtvfj'
 EMAIL_USE_TLS = True
+
+
+# django charts
+ADMIN_CHARTS_NVD3_JS_PATH = 'bow/nvd3/build/nv.d3.js'
+ADMIN_CHARTS_NVD3_CSS_PATH = 'bow/nvd3/build/nv.d3.css'
+ADMIN_CHARTS_D3_JS_PATH = 'bow/d3/d3.js'
