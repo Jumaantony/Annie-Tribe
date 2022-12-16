@@ -1,8 +1,12 @@
-from django.conf import settings
-from django.db import models
-from django.contrib.auth.models import User
-from products.models import Product
+from decimal import Decimal
 from phonenumber_field.modelfields import PhoneNumberField
+from django.core.validators import MinValueValidator, \
+    MaxValueValidator
+from django.db import models
+
+from products.models import Product
+from coupons.models import Coupon
+from account.models import User
 
 
 # Create your models here.
@@ -27,6 +31,17 @@ class Order(models.Model):
     order_status = models.CharField(max_length=10,
                                     choices=order_status_choices,
                                     default='Pending', )
+    coupon = models.ForeignKey(Coupon,
+                               related_name='orders',
+                               null=True,
+                               blank=True,
+                               on_delete=models.SET_NULL)
+    sub_total = models.DecimalField(decimal_places=2, max_digits=10, default=0)
+    total = models.DecimalField(decimal_places=2, max_digits=10, default=0)
+    discount = models.IntegerField(default=0,
+                                   validators=[MinValueValidator(0),
+                                               MaxValueValidator(100)])
+    braintree_id = models.CharField(max_length=150, blank=True)
 
     class Meta:
         ordering = ('-created',)
@@ -35,12 +50,18 @@ class Order(models.Model):
         return f'Order {self.id}'
 
     def get_total_cost(self):
-        return sum(item.get_cost() for item in self.items.all())
+        total_cost = sum(item.get_cost() for item in self.items.all())
+        return total_cost
+
+    def get_total_cost_after_discount(self):
+        total_cost = sum(item.get_cost() for item in self.items.all())
+        return total_cost - round(total_cost * (self.discount / Decimal(100)), 2)
 
 
 class OrderItem(models.Model):
     user = models.ForeignKey(User,
-                             on_delete=models.CASCADE)
+                             on_delete=models.CASCADE,
+                             null=True, blank=True)
     order = models.ForeignKey(Order,
                               related_name='items',
                               on_delete=models.CASCADE)

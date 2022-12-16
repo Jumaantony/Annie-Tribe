@@ -8,7 +8,7 @@
 
 {% block content %}
 <div class="alert alert-success p-3 container m-2" role="alert">
-  Hello <strong>{{ new_user.username }}</strong>?? Your account has been created successfully. Please Login <a
+  Hello <strong>{{ new_user.username }}</strong>?? Your account has been created successfully. You will however be required to verify your phone number to proceed making <a
         class="text-danger" href="{% url 'account:login' %}">here</a>
 </div>
 {% endblock %}

@@ -152,11 +152,11 @@
                     <a class=" fw-bold fs-4 text-decoration-none nav-head" href="{% url 'products:product_list' %}">
                       Products</a>
                   </div>
+<!--                  <div class="nav-link">-->
+<!--                    <a class=" fw-bold fs-4 text-decoration-none nav-head" href="blog.html">Fashion Blog</a>-->
+<!--                  </div>-->
                   <div class="nav-link">
-                    <a class=" fw-bold fs-4 text-decoration-none nav-head" href="blog.html">Fashion Blog</a>
-                  </div>
-                  <div class="nav-link">
-                     <a class="fw-bold fs-4 text-decoration-none nav-head" href="contact.html">Contact Us</a>
+                     <a class="fw-bold fs-4 text-decoration-none nav-head" href="{% url 'products:contact' %}">Contact Us</a>
                   </div>
 
                 </div>
@@ -164,7 +164,7 @@
 
           </div>
 
-          <!-- Search, Account and Cart.. hidden on x-small-->
+          <!-- Search, Account and Cart hidden on x-small-->
 
           <div class="d-flex">
             <div class="dropdown p-1  d-none d-sm-block">
@@ -225,8 +225,8 @@
       <!-- Search Form Toggled -->
       <div class="container-sm collapse mt-2" id="collapseExample">
 
-        <form class="d-flex" action="" method="">
-            <input class="form-control me-2" type="search" placeholder="Search for Products, Categories" aria-label="Search">
+        <form class="d-flex" action="{% url 'products:search' %}" method="get">
+            <input class="form-control me-2" type="search" name="search_query" placeholder="Search for Products, Categories" aria-label="Search">
 
             <input type="submit" name="Search" class="btn fw-bold btn-light btn-outline-dark">
 
@@ -292,8 +292,9 @@
           <h4 class="fw-bold">Subscribe to Our Mailing List</h4>
 
 
-          <form class="d-flex">
-            <input class="form-control me-2" type="email" placeholder="Enter your Email" aria-label="EMAIL">
+          <form class="d-flex" method="post" action="{% url 'products:subscribe' %}">
+            {% csrf_token %}
+            <input class="form-control me-2" name="subscriber_email" type="email" placeholder="Enter your Email" aria-label="EMAIL">
 
             <button class="btn fw-bold btn-light btn-outline-danger" type="submit">Subscribe</button>
 

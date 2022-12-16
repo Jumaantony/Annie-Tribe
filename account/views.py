@@ -1,11 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import PasswordResetView
-from django.contrib.messages.views import SuccessMessageMixin
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
-from .models import Profile
+from django.contrib.auth import views as auth_views
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+
+from .forms import UserRegistrationForm, UserEditForm, VerifyForm
+from . import verify
 
 
 # Create your views here.
@@ -13,20 +13,10 @@ def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():
-            # create a new user object but avoid saving
-            new_user = user_form.save(commit=False)
+            user_form.save()
+            verify.send(user_form.cleaned_data.get('phone'))
 
-            # set chosen password
-            new_user.set_password(
-                user_form.cleaned_data['password']
-            )
-
-            # save the user
-            new_user.save()
-
-            # create the user profile
-            Profile.objects.create(user=new_user)
-            return render(request, 'account/registration_done.html', {'new_user': new_user})
+            return redirect('account:verify')
         else:
             messages.error(request, 'Error Creating an Account. Please check if all fields are filled correctly')
 
@@ -38,28 +28,39 @@ def register(request):
 
 
 @login_required
-def dashboard(request):
+def verify_code(request):
     if request.method == 'POST':
-        user_form = UserEditForm(instance=request.user,
-                                 data=request.POST)
-        profile_form = ProfileEditForm(
-            instance=request.user.profile,
-            data=request.POST,
-            files=request.FILES
-        )
-        if user_form.is_valid() and profile_form.is_valid():
+        form = VerifyForm(request.POST)
+        if form.is_valid():
+            code = form.cleaned_data.get('code')
+            if verify.check(request.user.phone, code):
+                request.user.is_verified = True
+                request.user.save()
+                return redirect('account:dashboard')
+    else:
+        form = VerifyForm()
+    return render(request, 'account/verify.html', {'form': form})
+
+
+@login_required
+def dashboard(request, ):
+    user = request.user
+    if request.method == 'POST':
+        user_form = UserEditForm(request.POST,
+                                 instance=user, )
+
+        if user_form.is_valid():
             user_form.save()
-            profile_form.save()
-            messages.success(request, 'Profile updated Successfully')
+            verify.send(user_form.cleaned_data.get('phone'))
+
+            return redirect('account:verify')
         else:
             messages.error(request, 'Error updating your Profile')
     else:
         user_form = UserEditForm(instance=request.user)
-        profile_form = ProfileEditForm(instance=request.user.profile)
     return render(request,
                   'account/dashboard.html',
-                  {'user_form': user_form,
-                   'profile_form': profile_form})
+                  {'user_form': user_form, })
 
 
 @login_required
@@ -67,12 +68,16 @@ def side_dash(request):
     return render(request, 'account/side_dash.html')
 
 
-class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
-    template_name = 'registration/password_reset_form.html'
-    email_template_name = 'registration/password_reset_email.html'
-    subject_template_name = 'registration/password_reset_subject'
-    success_message = "We've emailed you instructions for re-setting your password, " \
-                      "if an account exists with the email you entered. You should receive them shortly." \
-                      " If you don't receive an email, " \
-                      "please make sure you've entered the address you registered with, and check your spam folder."
-    success_url = 'account:login'
+class PasswordChangeView(auth_views.PasswordChangeView):
+    success_url = reverse_lazy('account:password_change_done')
+
+
+class PasswordResetView(auth_views.PasswordResetView):
+    success_url = reverse_lazy('account:password_reset_done')
+
+
+class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    success_url = reverse_lazy('account:password_reset_complete')
+
+
+

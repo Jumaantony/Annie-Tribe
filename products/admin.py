@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Banner
+from .models import Category, Product, Banner, Review
 
 
 # Register your models here.
@@ -22,3 +22,8 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ['available', 'created', 'updated', ]
     list_editable = ['price', 'available', ]
     prepopulated_fields = {'slug': ('name',)}
+
+
+@admin.register(Review)
+class BannerAdmin(admin.ModelAdmin):
+    list_display = ['product', 'body', 'created', 'updated', 'active']

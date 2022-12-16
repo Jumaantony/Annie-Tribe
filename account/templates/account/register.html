@@ -12,7 +12,9 @@ label{
   font-weight: bold;
   }
 
-.help-block{
+#hint_id_phone, #hint_id_password2, li{
+font-style: italic;
+font-size: 13px;
 color: red;
 }
 
@@ -34,7 +36,7 @@ input{
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
   }
 </style>
-      <div class="form w-75 mx-auto mt-3">
+      <div class="form w-75 mx-auto mt-3 rounded">
 
         <!-- Display Message on Creating an Account -->
         <cente>
@@ -55,14 +57,14 @@ input{
 
           <div class="row">
             <div class="form-group col-lg-6 col-md-6 col-12 mb-0">
-              {{ user_form.username|as_crispy_field }}
+              {{ user_form.username|as_crispy_field}}
             </div>
             <div class="form-group col-lg-6 col-md-6 col-12 mb-0">
               {{ user_form.email|as_crispy_field }}
             </div>
           </div>
 
-          <div class="row">
+          <div class="row pt-1">
             <div class="form-group col-lg-6 col-md-6 col-12 mb-0">
               {{ user_form.first_name|as_crispy_field }}
             </div>
@@ -71,9 +73,16 @@ input{
             </div>
           </div>
 
-          <div class="row">
+
+          <div class="row pt-1 justify-content-center">
+            <div class="form-group col-lg-12 col-md-12 col-12 mb-0">
+              {{ user_form.phone|as_crispy_field }}
+            </div>
+          </div>
+
+          <div class="row pt-1">
             <div class="form-group col-lg-6 col-md-6 col-12 mb-0">
-              {{ user_form.password|as_crispy_field }}
+              {{ user_form.password1|as_crispy_field }}
             </div>
             <div class="form-group col-lg-6 col-md-6 col-12 mb-0">
               {{ user_form.password2|as_crispy_field }}

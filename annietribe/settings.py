@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
+import braintree
+
 # cloudinary imports
 import cloudinary
 import cloudinary.uploader
@@ -37,7 +39,7 @@ SECRET_KEY = 'django-insecure-l7i$059ak+ibx&z=2hyx0-m0i*r4=dpxkw2x=l$x#@6ix6ct20
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0bd7-154-159-237-225.in.ngrok.io', '127.0.0.1']
 
 # messages
 MESSAGE_TAGS = {
@@ -76,6 +78,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'phonenumber_field',
     'jazzmin',
+    'django_social_share',
 
     # ck editor
     'ckeditor',
@@ -259,8 +262,12 @@ WSGI_APPLICATION = 'annietribe.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'annie',
+        'USER': 'annie',
+        'PASSWORD': 'annie',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -282,7 +289,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Custom Django auth settings
+AUTHENTICATION_BACKENDS = \
+    ('django.contrib.auth.backends.AllowAllUsersModelBackend',
+     # email authentication
+     'account.authentication.EmailAuthBackend',
+     )
 
+AUTH_USER_MODEL = 'account.User'
 
 # REdirect URLS
 LOGIN_REDIRECT_URL = 'account:dashboard'
@@ -313,3 +327,42 @@ STATIC_ROOT = 'static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Braintree settings
+BRAINTREE_MERCHANT_ID = 'vk22nv886356wwgh'
+BRAINTREE_PUBLIC_KEY = 'nvbb53rjxpcjgh4k'
+BRAINTREE_PRIVATE_KEY = '3dd66d0db0a73a52dae51ea7602f131f'
+# Merchant ID
+# Public Key
+# Private key
+BRAINTREE_CONF = braintree.Configuration(
+    braintree.Environment.Sandbox,
+    BRAINTREE_MERCHANT_ID,
+    BRAINTREE_PUBLIC_KEY,
+    BRAINTREE_PRIVATE_KEY
+)
+
+# mailchimp config
+MAILCHIMP_API_KEY = '9c538e43bd29f6ec6b97fc4817046f9b-us8'
+MAILCHIMP_REGION = 'us8'
+MAILCHIMP_MARKETING_AUDIENCE_ID = '7dc853a438'
+
+# twilio config
+
+TWILIO_VERIFY_SERVICE_SID = 'VAb9acbf37bd25e5f9a8b6911162a8536f'
+TWILIO_ACCOUNT_SID = 'AC932742e59389ffc506cc4bb38de2e6a9'
+TWILIO_AUTH_TOKEN = 'b32936fb6169d9c4d086435874061577'
+
+# sending emails
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'jumaanton98@gmail.com'
+EMAIL_HOST_PASSWORD = 'ominrpedqaebtvfj'
+EMAIL_USE_TLS = True
+
+
+# django charts
+ADMIN_CHARTS_NVD3_JS_PATH = 'bow/nvd3/build/nv.d3.js'
+ADMIN_CHARTS_NVD3_CSS_PATH = 'bow/nvd3/build/nv.d3.css'
+ADMIN_CHARTS_D3_JS_PATH = 'bow/d3/d3.js'
