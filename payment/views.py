@@ -72,8 +72,8 @@ def card_payment(request):
 
 @login_required
 def get_access_token(request):
-    consumer_key = '51SRQhI7wyPIU80usGlMC1TazNScAMvv'
-    consumer_secret = '5U2Byx7Yn9U2wiZA'
+    consumer_key = 'E4yc9wFcaAdeoFe2vxYVzSAT7M2nroQU'
+    consumer_secret = 'uWsn21FgMbIzhmE3'
 
     # url for generating mpesa token
     api_url = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'

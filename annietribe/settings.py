@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
@@ -19,6 +20,10 @@ import braintree
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+
+from dotenv import load_dotenv
+load_dotenv()  # loads the configs from .env
+
 
 # cloudinary config
 cloudinary.config(
@@ -329,9 +334,9 @@ STATIC_ROOT = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Braintree settings
-BRAINTREE_MERCHANT_ID = 'vk22nv886356wwgh'
-BRAINTREE_PUBLIC_KEY = 'nvbb53rjxpcjgh4k'
-BRAINTREE_PRIVATE_KEY = '3dd66d0db0a73a52dae51ea7602f131f'
+BRAINTREE_MERCHANT_ID = str(os.getenv('BRAINTREE_MERCHANT_ID '))
+BRAINTREE_PUBLIC_KEY = str(os.getenv('BRAINTREE_PUBLIC_KEY'))
+BRAINTREE_PRIVATE_KEY = str(os.getenv('BRAINTREE_PRIVATE_KEY'))
 # Merchant ID
 # Public Key
 # Private key
@@ -343,26 +348,24 @@ BRAINTREE_CONF = braintree.Configuration(
 )
 
 # mailchimp config
-MAILCHIMP_API_KEY = '9c538e43bd29f6ec6b97fc4817046f9b-us8'
+MAILCHIMP_API_KEY = str(os.getenv('MAILCHIMP_API_KEY '))
 MAILCHIMP_REGION = 'us8'
-MAILCHIMP_MARKETING_AUDIENCE_ID = '7dc853a438'
+MAILCHIMP_MARKETING_AUDIENCE_ID = str(os.getenv('MAILCHIMP_MARKETING_AUDIENCE_ID'))
 
 # twilio config
 
-TWILIO_VERIFY_SERVICE_SID = 'VAb9acbf37bd25e5f9a8b6911162a8536f'
-TWILIO_ACCOUNT_SID = 'AC932742e59389ffc506cc4bb38de2e6a9'
-TWILIO_AUTH_TOKEN = 'b32936fb6169d9c4d086435874061577'
+TWILIO_VERIFY_SERVICE_SID = str(os.getenv('TWILIO_VERIFY_SERVICE_SID'))
+TWILIO_ACCOUNT_SID = str(os.getenv('TWILIO_ACCOUNT_SID'))
+TWILIO_AUTH_TOKEN = str(os.getenv('TWILIO_AUTH_TOKEN'))
+
+# mpesa keys
+mpesa_consumer_key = str(os.getenv('consumer_key'))
+mpesa_consumer_secret = str(os.getenv('consumer_secret'))
 
 # sending emails
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'jumaanton98@gmail.com'
-EMAIL_HOST_PASSWORD = 'ominrpedqaebtvfj'
+EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_HOST_PASSWORD'))
 EMAIL_USE_TLS = True
-
-
-# django charts
-ADMIN_CHARTS_NVD3_JS_PATH = 'bow/nvd3/build/nv.d3.js'
-ADMIN_CHARTS_NVD3_CSS_PATH = 'bow/nvd3/build/nv.d3.css'
-ADMIN_CHARTS_D3_JS_PATH = 'bow/d3/d3.js'

@@ -1,2 +1,13 @@
-# Annie-Tribe
-This is an E-commerce Website designed with django, javascript, bootstrap, html and css3
+# Annie-Tribe 
+
+
+![l](../annie/account/static/images/favicon.png "MarineGEO logo")
+
+**E-commerce Website developed with the following technologies:**
+
+* Python
+* Django
+* JS
+* HTML
+* CSS
+
