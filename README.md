@@ -31,47 +31,47 @@ The project has
 
 ## **Login Page**
 
-![](../annie/readmefiles/signin.png "Payment Options Page")
+![](./readmefiles/signin.png "Payment Options Page")
 
 ## **Account Details**
 
-![](../annie/readmefiles/accountdetails.png "Payment Options Page")
+![](./readmefiles/accountdetails.png "Payment Options Page")
 
 ## **Admin Login Page**
-![](../annie/readmefiles/admin.png "Admin Login")
+![](./readmefiles/admin.png "Admin Login")
 
 
 ## Admin Dashboard customized with django-jazzmine
 
-![](../annie/readmefiles/admindashboard.png "Admin Dashboard")
+![](./readmefiles/admindashboard.png "Admin Dashboard")
 
 
 ## **Home Page**
 
-![](../annie/readmefiles/homepage.png "Home Page")
+![](./readmefiles/homepage.png "Home Page")
 
 
 ## **Products Page**
 
-![](../annie/readmefiles/products.png "Products Page")
+![](./readmefiles/products.png "Products Page")
 
 
 ## **Products Detail**
 
-![](../annie/readmefiles/productdetail.png "Products detail Page")
+![](./readmefiles/productdetail.png "Products detail Page")
 
 
 ## **Cart**
 
-![](../annie/readmefiles/cart.png "Cart Page")
+![](./readmefiles/cart.png "Cart Page")
 
 
 ## **Payment Options**
-![](../annie/readmefiles/paymentoptions.png "Payment Options Page")
+![](./readmefiles/paymentoptions.png "Payment Options Page")
 
 
 ## **Mpesa Stk Prompt**
 
-![](../annie/readmefiles/mpesastk.jpeg "Mpesa STK Prompt")
+![](./readmefiles/mpesastk.jpeg "Mpesa STK Prompt")
 
 
